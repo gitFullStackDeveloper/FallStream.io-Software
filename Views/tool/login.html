@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Login | FallStream.io</title>
+    <script src="../js/page-loader.js"></script>
+
+    <link rel="stylesheet" href="../css/login.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="page-wrap">
+      <!-- ── LEFT PANEL ──────────────────────────────────── -->
+      <div class="left-bg">
+        <div class="grid-lines"></div>
+        <div class="particles" id="particles"></div>
+
+        <div class="left-content">
+          <div class="">
+            <img
+              src="../assets/screen-recorder-logo.png"
+              style="width: 70px; height: auto"
+            />
+          </div>
+          <br />
+          <h1 class="animated-gradient-text">FallStream.io</h1>
+          <p class="left-subtitle">
+            Capture every moment. Share with the world.
+          </p>
+
+          <ul class="feature-list">
+            <li class="feature-item">
+              <span class="feature-icon"><i class="fas fa-video"></i></span>
+              HD screen &amp; webcam recording
+            </li>
+            <li class="feature-item">
+              <span class="feature-icon"
+                ><i class="fas fa-cloud-upload-alt"></i
+              ></span>
+              Cloud storage &amp; instant sharing
+            </li>
+            <li class="feature-item">
+              <span class="feature-icon"><i class="fas fa-magic"></i></span>
+              Annotation tools &amp; AI captions
+            </li>
+            <li class="feature-item">
+              <span class="feature-icon"><i class="fas fa-users"></i></span>
+              Team collaboration &amp; comments
+            </li>
+          </ul>
+
+          <div class="secure-badge">
+            <i class="fas fa-lock"></i>
+            256-bit encrypted &amp; secure
+          </div>
+        </div>
+      </div>
+
+      <!-- ── RIGHT PANEL ─────────────────────────────────── -->
+      <div class="right-panel">
+        <div class="form-card">
+          <div class="form-header">
+            <div class="form-header-icon">
+              <i class="fas fa-sign-in-alt"></i>
+            </div>
+            <h2 class="form-title">Welcome back</h2>
+            <p class="form-subtitle">Sign in to continue to your workspace</p>
+          </div>
+
+          <!-- Message area -->
+          <div id="loginMessage"></div>
+
+          <form id="loginForm" autocomplete="off">
+            <div class="field-group">
+              <label class="field-label" for="email">Email address</label>
+              <div class="field-wrap">
+                <i class="fas fa-envelope field-icon"></i>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="form-input"
+                  placeholder="you@example.com"
+                  required
+                  autocomplete="email"
+                />
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="password">Password</label>
+              <div class="field-wrap">
+                <i class="fas fa-lock field-icon"></i>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  class="form-input"
+                  placeholder="Enter your password"
+                  required
+                />
+                <i class="fas fa-eye-slash toggle-password"></i>
+              </div>
+            </div>
+
+            <div class="row-between">
+              <label class="check-label">
+                <input type="checkbox" /> Remember me
+              </label>
+              <a href="/forgot-password" class="forgot-link"
+                >Forgot password?</a
+              >
+            </div>
+
+            <button
+              type="submit"
+              class="btn-gradient btn-hover-slide"
+              id="loginBtn"
+            >
+              <span class="btn-text"
+                ><i class="fas fa-arrow-right-to-bracket"></i> Sign In</span
+              >
+              <span class="btn-spinner" style="display: none"
+                ><i class="fas fa-spinner fa-spin"></i> Signing in...</span
+              >
+            </button>
+          </form>
+
+          <p class="form-footer">
+            Don't have an account? <a href="/signup"> Create one free</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/login.js"></script>
+  </body>
+</html>

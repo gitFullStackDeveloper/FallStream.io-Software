@@ -1,0 +1,60 @@
+{
+  "name": "screen-recorder-pro",
+  "version": "1.0.0",
+  "description": "Professional Screen Recorder Desktop App",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "electron-dev": "cross-env NODE_ENV=development electron electron/main.js",
+    "build:win": "electron-builder --win"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "busboy": "^1.6.0",
+    "dotenv": "^16.6.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^9.4.1",
+    "nodemailer": "^8.0.7",
+    "ws": "^8.21.0"
+  },
+  "devDependencies": {
+    "cross-env": "^10.1.0",
+    "electron": "^28.3.3",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.FallStream.io",
+    "productName": "FallStream.io",
+    "directories": {
+      "output": "dist-electron"
+    },
+    "files": [
+      "electron/**/*",
+      "Views/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "extraMetadata": {
+      "main": "electron/main.js"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "./assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "FallStream.io",
+      "installerIcon": "assets/icon.ico",
+      "uninstallerIcon": "assets/icon.ico",
+      "installerHeaderIcon": "assets/icon.ico",
+      "runAfterFinish": true,
+      "deleteAppDataOnUninstall": true
+    }
+  }
+}

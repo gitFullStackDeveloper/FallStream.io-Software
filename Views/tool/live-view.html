@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Watch Live | FallStream.io</title>
+        <script src="../js/page-loader.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/live-view.css" />
+  </head>
+  <body>
+    <div class="viewer-container">
+      <!-- Join Screen -->
+      <div class="join-card" id="joinForm">
+        <div id="statusBadge"></div>
+        <h1 id="sessionTitle">Loading...</h1>
+        <p id="sessionDesc"></p>
+        <p
+          id="scheduleInfo"
+          style="color: #64748b; font-size: 0.9rem; margin-top: 0.5rem"
+        ></p>
+        <p style="color: #64748b; font-size: 0.9rem">
+          Hosted by <strong id="hostName">...</strong>
+        </p>
+        <input type="text" id="viewerName" placeholder="Your name" />
+        <input
+          type="text"
+          id="accessInput"
+          placeholder="Enter password"
+          style="display: none"
+        />
+        <button id="joinBtn" class="btn-hover-slide" onclick="joinSession()">
+          <span class="btn-text" style="color: white"
+            ><i class="fas fa-play-circle"></i> Join Session</span
+          >
+          <span class="btn-spinner" style="display: none; color: white"
+            ><i class="fas fa-spinner fa-spin"></i> Joining...</span
+          >
+        </button>
+        <p style="color: #94a3b8; font-size: 0.75rem; margin-top: 1rem">
+          No software installation required
+        </p>
+      </div>
+
+      <!-- Watch Screen -->
+      <div class="hidden" id="streamView">
+        <div class="main-grid">
+          <div>
+            <div class="video-section" id="videoContainer">
+              <video id="remoteVideo" autoplay playsinline></video>
+              <div class="video-overlay">
+                <span class="live-dot"></span> LIVE
+              </div>
+              <button
+                class="fullscreen-btn"
+                id="fullscreenBtn"
+                onclick="toggleFullscreen()"
+                title="Fullscreen"
+              >
+                <i class="fas fa-expand"></i>
+              </button>
+              <button class="unmute-btn" id="unmuteBtn" onclick="unmuteVideo()">
+                <i class="fas fa-volume-mute"></i> Tap to Unmute
+              </button>
+            </div>
+            <div class="session-info-bar">
+              <div class="host-info">
+                <div class="host-avatar" id="hostAvatar">H</div>
+                <div>
+                  <div class="host-name" id="hostNameLive">Host</div>
+                  <div class="host-title" id="titleLive">Live Session</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="chat-panel">
+            <div class="chat-header">
+              <i class="fas fa-comments"></i> Live Chat
+            </div>
+            <div class="pinned-bar" id="pinnedBar">
+              <i class="fas fa-thumbtack pin-icon"></i>
+              <span class="pin-text" id="pinnedText"></span>
+            </div>
+            <div class="chat-messages" id="chatMessages"></div>
+            <div class="chat-input-row">
+              <input
+                type="text"
+                id="chatInput"
+                placeholder="Send a message..."
+                onkeypress="if (event.key === 'Enter') sendChat();"
+              />
+              <button onclick="sendChat()">
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/live-view.js"></script>
+  </body>
+</html>

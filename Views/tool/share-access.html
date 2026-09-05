@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Access Shared Video | FallStream.io</title>
+    <script src="../js/page-loader.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/share-access.css" />
+  </head>
+  <body>
+    <div class="access-card" id="accessCard">
+      <div class="access-icon locked" id="accessIcon">
+        <i class="fas fa-lock"></i>
+      </div>
+      <h2 id="accessTitle">Access Shared Video</h2>
+      <p class="shared-by">Shared by <strong id="sharedByName">...</strong></p>
+      <p
+        style="color: #64748b; font-size: 0.9rem; margin-bottom: 1rem"
+        id="recordingTitle"
+      >
+        Loading...
+      </p>
+
+      <!-- Normal access form -->
+      <div id="accessForm">
+        <div id="passwordSection">
+          <div class="form-group">
+            <label>Password</label>
+            <input
+              type="text"
+              id="accessPassword"
+              placeholder="Enter the password"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" id="viewerName" placeholder="Enter your name" />
+        </div>
+        <div class="form-group">
+          <label>Your Email</label>
+          <input type="email" id="viewerEmail" placeholder="Enter your email" />
+        </div>
+
+        <button class="btn-access btn-hover-slide" id="btnAccess">
+          <i class="fas fa-play"></i>
+          <span style="color: white"> Access Video</span>
+        </button>
+        <p class="error-msg" id="errorMsg"></p>
+      </div>
+
+      <!-- Blocked message (hidden by default) -->
+      <div id="blockedMessage" style="display: none">
+        <p class="blocked-message">
+          <i class="fas fa-ban" style="color: #ef4444"></i>
+          This shared video has been <strong>blocked</strong> by the owner.<br />
+          Please contact the person who shared this link for more information.
+        </p>
+      </div>
+
+      <!-- Expired message (hidden by default) -->
+      <div id="expiredMessage" style="display: none">
+        <p class="blocked-message">
+          <i class="fas fa-clock" style="color: #f59e0b"></i>
+          This shared video link has <strong>expired</strong>.<br />
+          Please ask the owner to generate a new share link.
+        </p>
+      </div>
+    </div>
+
+    <script src="../js/share-access.js"></script>
+  </body>
+</html>

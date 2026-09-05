@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Downloads | FallStream.io</title>
+    <script src="../js/page-loader.js"></script>
+
+    <link rel="stylesheet" href="../css/sidebar.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <link rel="stylesheet" href="../css/downloads.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="app-container">
+      <div id="sidebar-container"></div>
+
+      <main class="main-content">
+        <header class="dashboard-header">
+          <div class="header-left">
+            <h1 class="page-title">Library</h1>
+            <p class="welcome-msg">Your recordings library</p>
+          </div>
+          <div class="header-right">
+            <div class="profile-dropdown" id="profileDropdown">
+              <div class="avatar">
+                <img
+                  id="headerAvatar"
+                  src="https://ui-avatars.com/api/?background=2563eb&color=fff&name=User"
+                  alt="avatar"
+                />
+              </div>
+              <span class="profile-name" id="headerName">User</span>
+              <i
+                class="fas fa-chevron-down"
+                style="font-size: 0.7rem; color: var(--gray-400)"
+              ></i>
+              <div class="dropdown-menu">
+                <a href="/profile"
+                  ><i class="fas fa-user"></i> My Profile</a
+                >
+                <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                <hr />
+                <a href="../login" id="logoutBtn"
+                  ><i class="fas fa-sign-out-alt"></i> Logout</a
+                >
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <div class="downloads-page">
+          <!-- ═══ FULL WIDTH PLAYER ═══ -->
+          <div class="player-panel">
+            <div class="player-wrap">
+              <div class="porb1"></div>
+              <div class="porb2"></div>
+              <video id="mainPlayer" controls></video>
+              <div class="player-idle" id="playerIdle">
+                <div class="player-idle-icon">
+                  <i class="fas fa-play-circle"></i>
+                </div>
+                <h1 class="idle-title">Ready to Play</h1>
+                <p class="idle-sub">
+                  Select a recording below <strong>to play</strong>
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="player-info-bar"
+              id="playerInfoBar"
+              style="display: none"
+            >
+              <div class="player-meta">
+                <h2 id="playerTitle">—</h2>
+                <div class="player-badges">
+                  <span class="pbadge" id="playerDur"
+                    ><i class="fas fa-clock"></i> —</span
+                  >
+                  <span class="pbadge" id="playerDate"
+                    ><i class="fas fa-calendar"></i> —</span
+                  >
+                  <span class="pbadge" id="playerSize"
+                    ><i class="fas fa-hdd"></i> —</span
+                  >
+                </div>
+              </div>
+              <div class="player-actions">
+                <button
+                  class="paction-btn paction-dl btn-hover-slide"
+                  id="btnDownload"
+                >
+                  <i class="fas fa-download"></i> <span> Download</span>
+                </button>
+                <button
+                  class="paction-btn paction-del"
+                  id="btnPlayerDelete"
+                  title="Delete"
+                >
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ═══ LIBRARY PANEL (ENHANCED) ═══ -->
+          <div class="library-panel">
+            <br />
+            <!-- Credits Bar -->
+            <div class="credits-bar">
+              <div class="credit-item">
+                <div class="credit-icon blue">
+                  <i class="fas fa-video" style="font-size: 1.3rem"></i>
+                </div>
+                <div class="credit-info">
+                  <span class="credit-num" id="creditTotal">0</span
+                  ><span class="credit-lbl">Total Videos</span>
+                </div>
+              </div>
+              <div class="credit-item">
+                <div class="credit-icon green">
+                  <i class="fas fa-share-alt" style="font-size: 1.3rem"></i>
+                </div>
+                <div class="credit-info">
+                  <span class="credit-num" id="creditShared">0</span
+                  ><span class="credit-lbl">Shared Videos</span>
+                </div>
+              </div>
+              <div class="credit-item">
+                <div class="credit-icon purple">
+                  <i class="fas fa-hard-drive" style="font-size: 1.3rem"></i>
+                </div>
+                <div class="credit-info">
+                  <span class="credit-num" id="creditStorage">0 MB</span
+                  ><span class="credit-lbl">Storage Used</span>
+                </div>
+              </div>
+              <div class="credit-item">
+                <div class="credit-icon orange">
+                  <i class="fas fa-clock" style="font-size: 1.3rem"></i>
+                </div>
+                <div class="credit-info">
+                  <span class="credit-num" id="creditDuration">0m</span
+                  ><span class="credit-lbl">Total Duration</span>
+                </div>
+              </div>
+            </div>
+            <br />
+            <div class="library-header-improved">
+              <div class="library-header-left">
+                <div class="section-heading-icon">
+                  <i class="fas fa-video"></i>
+                </div>
+                <div class="section-heading-text">
+                  <h2 class="section-heading">My Recordings</h2>
+                  <p class="section-sub">
+                    Browse, play and manage your saved captures
+                  </p>
+                </div>
+              </div>
+              <button
+                class="import-btn btn-hover-slide"
+                id="btnImportVideo"
+                title="Import external video"
+              >
+                <i class="fas fa-plus"></i>
+                <span style="color: white">Import Video</span>
+              </button>
+            </div>
+            <br /><br />
+
+            <!-- ═══ BIG PREMIUM FILTER BAR ═══ -->
+            <div class="big-filter-bar">
+              <p class="section-sub" style="margin: 0; padding: 0">
+                <i class="fas fa-search"></i> Search
+              </p>
+
+              <!-- Accent line at top -->
+              <div class="filter-accent-line"></div>
+
+              <div class="filter-main-row">
+                <!-- Search with icon -->
+                <div class="filter-search-hero">
+                  <!-- <div class="search-icon-circle">
+                <i class="fas fa-search"></i>
+              </div> -->
+                  <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search your recordings..."
+                    class="search-hero-input"
+                  />
+                </div>
+
+                <!-- Sort Chips -->
+                <div class="sort-chips-row">
+                  <span class="sort-label">Sort by</span>
+                  <div class="sort-chips">
+                    <button class="sort-chip active" data-sort="newest">
+                      <i class="fas fa-clock"></i>
+                      <span>Newest</span>
+                    </button>
+                    <button class="sort-chip" data-sort="oldest">
+                      <i class="fas fa-history"></i>
+                      <span>Oldest</span>
+                    </button>
+                    <button class="sort-chip" data-sort="name">
+                      <i class="fas fa-font"></i>
+                      <span>A-Z</span>
+                    </button>
+                    <button class="sort-chip" data-sort="size">
+                      <i class="fas fa-weight-hanging"></i>
+                      <span>Size</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="filter-action-row">
+                <!-- View Toggle -->
+                <div class="view-segment">
+                  <button class="segment-btn active" id="btnGrid">
+                    <i class="fas fa-th-large"></i>
+                    <span>Grid</span>
+                  </button>
+                  <button class="segment-btn" id="btnList">
+                    <i class="fas fa-list-ul"></i>
+                    <span>List</span>
+                  </button>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="filter-buttons-group">
+                  <button
+                    class="filter-btn filter-btn-apply btn-hover-slide"
+                    id="applyFilterBtn"
+                  >
+                    <i class="fas fa-filter"></i>
+                    <span>Apply Filters</span>
+                  </button>
+                  <button
+                    class="filter-btn filter-btn-reset"
+                    id="resetFilterBtn"
+                  >
+                    <i class="fas fa-undo-alt"></i>
+                    <span>Reset</span>
+                  </button>
+                </div>
+              </div>
+
+              <select id="sortSelect" style="display: none">
+                <option value="newest" selected>Newest first</option>
+                <option value="oldest">Oldest first</option>
+                <option value="name">By name</option>
+                <option value="size">By size</option>
+              </select>
+            </div>
+
+            <!-- Stats -->
+            <!-- <div class="lib-stats"><span id="statCount">0 recordings</span><span id="statTotal">0 MB total</span></div> -->
+            <br /><br /><br /><br />
+            <!-- Empty state -->
+            <div class="lib-empty hidden" id="libEmpty">
+              <div class="empty-icon"><i class="fas fa-folder-open"></i></div>
+              <p class="empty-title">No recordings yet</p>
+              <p class="empty-sub">
+                Go to <a href="recording.html">Recording Studio</a> or import a
+                video to get started
+              </p>
+            </div>
+
+            <!-- Grid -->
+            <div class="recordings-grid" id="recordingsGrid"></div>
+            <!-- List -->
+            <div class="recordings-list-view hidden" id="recordingsList"></div>
+
+            <!-- ═══ HOW TO MANAGE ═══ -->
+            <div class="manage-instructions">
+              <div class="instr-header">
+                <i class="fas fa-info-circle"></i>
+                <h3>How to manage your recordings</h3>
+              </div>
+              <div class="instr-grid">
+                <div class="instr-item blue">
+                  <div class="instr-icon"><i class="fas fa-play"></i></div>
+                  <div class="instr-text">
+                    <h4>Play & Preview</h4>
+                    <p>Click any thumbnail to preview.</p>
+                  </div>
+                </div>
+                <div class="instr-item green">
+                  <div class="instr-icon"><i class="fas fa-download"></i></div>
+                  <div class="instr-text">
+                    <h4>Download</h4>
+                    <p>Save recordings locally.</p>
+                  </div>
+                </div>
+                <div class="instr-item purple">
+                  <div class="instr-icon"><i class="fas fa-share-alt"></i></div>
+                  <div class="instr-text">
+                    <h4>Share & Export</h4>
+                    <p>Generate shareable links.</p>
+                  </div>
+                </div>
+                <div class="instr-item orange">
+                  <div class="instr-icon"><i class="fas fa-upload"></i></div>
+                  <div class="instr-text">
+                    <h4>Import Videos</h4>
+                    <p>Add external videos.</p>
+                  </div>
+                </div>
+              </div>
+              <p class="instr-footnote">
+                <i class="fas fa-database"></i> All files are stored locally –
+                nothing leaves your device.
+              </p>
+            </div>
+          </div>
+          <!-- end .library-panel -->
+        </div>
+        <!-- end .downloads-page -->
+      </main>
+    </div>
+
+    <!-- Delete Modal -->
+    <div class="modal-overlay hidden" id="deleteModal">
+      <div class="modal-card">
+        <div class="modal-icon red"><i class="fas fa-trash-alt"></i></div>
+        <h3>Delete Recording?</h3>
+        <p>This cannot be undone.</p>
+        <div class="modal-actions">
+          <button class="modal-btn-outline" id="btnDelCancel">Cancel</button>
+          <!-- <button class="modal-btn-del btn-hover-slide" style="background-color: #ef4444;"> -->
+          <button
+            class="modal-btn-del btn-hover-slide"
+            id="btnDelConfirm"
+            style="background-color: #ef4444"
+          >
+            <span class="btn-text" style="color: white">Delete</span>
+            <span class="btn-spinner" style="display: none; color: white"
+              ><i class="fas fa-spinner fa-spin"></i> Deleting...</span
+            >
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rename Modal -->
+    <div class="modal-overlay hidden" id="renameModal">
+      <div class="modal-card">
+        <div class="modal-icon blue"><i class="fas fa-pen"></i></div>
+        <h3>Rename Recording</h3>
+        <p>Enter a new name.</p>
+        <input
+          type="text"
+          id="renameInput"
+          class="rename-input"
+          placeholder="New name"
+          maxlength="100"
+        />
+        <div class="modal-actions" style="margin-top: 1.5rem">
+          <button class="modal-btn-outline" id="btnRenameCancel">Cancel</button>
+          <button
+            class="modal-btn-del btn-hover-slide"
+            id="btnRenameConfirm"
+            style="background: #2563eb"
+          >
+            <span class="btn-text" style="color: white">Rename</span>
+            <span class="btn-spinner" style="display: none; color: white"
+              ><i class="fas fa-spinner fa-spin"></i> Renaming...</span
+            >
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Import Video Modal -->
+    <div class="modal-overlay hidden" id="importModal">
+      <div class="modal-card" style="max-width: 500px">
+        <div class="modal-icon blue"><i class="fas fa-upload"></i></div>
+        <h3>Import Video</h3>
+        <p>Add an external video to your library</p>
+        <div style="margin-bottom: 1.2rem">
+          <label
+            style="
+              font-weight: 600;
+              color: #475569;
+              display: block;
+              margin-bottom: 0.4rem;
+              text-align: left;
+            "
+            >Video Title</label
+          >
+          <input
+            type="text"
+            id="importTitle"
+            placeholder="Enter video title"
+            style="
+              width: 100%;
+              padding: 0.7rem 1rem;
+              border: 1.5px solid #e2e8f0;
+              border-radius: 10px;
+              font-family: inherit;
+              font-size: 0.9rem;
+              outline: none;
+            "
+          />
+        </div>
+        <div style="margin-bottom: 1.5rem">
+          <label
+            style="
+              font-weight: 600;
+              color: #475569;
+              display: block;
+              margin-bottom: 0.4rem;
+              text-align: left;
+            "
+            >Video File</label
+          >
+          <div
+            style="
+              border: 2px dashed #e2e8f0;
+              border-radius: 12px;
+              padding: 2rem;
+              text-align: center;
+              cursor: pointer;
+              transition: all 0.2s;
+            "
+            id="importDropZone"
+            onclick="document.getElementById('importFile').click()"
+          >
+            <i
+              class="fas fa-cloud-upload-alt"
+              style="font-size: 2rem; color: #94a3b8; margin-bottom: 0.5rem"
+            ></i>
+            <p style="color: #64748b; font-size: 0.9rem">
+              Click to browse or drag & drop
+            </p>
+            <p style="color: #94a3b8; font-size: 0.75rem; margin-top: 0.3rem">
+              MP4, WebM, AVI — Max 500MB
+            </p>
+          </div>
+          <input
+            type="file"
+            id="importFile"
+            accept="video/*"
+            style="display: none"
+            onchange="handleImportFileSelect(this)"
+          />
+          <p
+            id="importFileName"
+            style="
+              color: #3b82f6;
+              font-size: 0.85rem;
+              margin-top: 0.5rem;
+              display: none;
+            "
+          ></p>
+        </div>
+        <div class="modal-actions">
+          <button class="modal-btn-outline" id="btnImportCancel">Cancel</button>
+          <button
+            class="modal-btn-del btn-hover-slide"
+            id="btnImportConfirm"
+            style="background: #2563eb"
+          >
+            <span class="btn-text"
+              ><i class="fas fa-upload"></i> Import Video</span
+            >
+            <span class="btn-spinner" style="display: none"
+              ><i class="fas fa-spinner fa-spin"></i> Importing...</span
+            >
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast hidden" id="toast">
+      <i class="fas fa-check-circle"></i><span id="toastMsg">Done!</span>
+    </div>
+
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/downloads.js"></script>
+  </body>
+</html>

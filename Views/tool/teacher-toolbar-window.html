@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/teacher-toolbar-window.css" />
+  </head>
+  <body>
+    <div class="toolbar-container" id="toolbarContainer">
+      <div class="drag-handle" id="dragHandle">
+        <i class="fas fa-grip-dots-vertical"></i>
+      </div>
+
+      <!-- Laser Pointer -->
+      <button class="tool-btn" id="btnLaser" title="Laser Pointer (L)">
+        <i class="fas fa-circle"></i>
+      </button>
+
+      <!-- Drawing Mode -->
+      <button class="tool-btn" id="btnDraw" title="Drawing (D)">
+        <i class="fas fa-pencil-alt"></i>
+      </button>
+
+      <!-- Eraser -->
+      <button class="tool-btn" id="btnClear" title="Clear All (C)">
+        <i class="fas fa-eraser"></i>
+      </button>
+
+      <div class="divider"></div>
+
+      <!-- Colors -->
+      <div
+        class="color-dot active"
+        data-color="#ef4444"
+        style="background: #ef4444"
+        title="Red"
+      ></div>
+      <div
+        class="color-dot"
+        data-color="#f59e0b"
+        style="background: #f59e0b"
+        title="Yellow"
+      ></div>
+      <div
+        class="color-dot"
+        data-color="#22c55e"
+        style="background: #22c55e"
+        title="Green"
+      ></div>
+      <div
+        class="color-dot"
+        data-color="#3b82f6"
+        style="background: #3b82f6"
+        title="Blue"
+      ></div>
+      <div
+        class="color-dot"
+        data-color="#a855f7"
+        style="background: #a855f7"
+        title="Purple"
+      ></div>
+      <div
+        class="color-dot"
+        data-color="#ffffff"
+        style="background: #ffffff; border: 2px solid rgba(255, 255, 255, 0.3)"
+        title="White"
+      ></div>
+
+      <div class="divider"></div>
+
+      <!-- Pen Size -->
+      <div
+        class="size-indicator"
+        id="sizeIndicator"
+        style="background: #ef4444; width: 12px; height: 12px"
+      ></div>
+      <input
+        type="range"
+        id="sizeSlider"
+        min="2"
+        max="20"
+        value="4"
+        orient="vertical"
+        style="
+          writing-mode: vertical-lr;
+          direction: rtl;
+          width: 4px;
+          height: 80px;
+          -webkit-appearance: slider-vertical;
+        "
+      />
+
+      <!-- Undo / Redo -->
+      <button class="tool-btn" id="btnUndo" title="Undo (Ctrl+Z)">
+        <i class="fas fa-undo"></i>
+      </button>
+      <button class="tool-btn" id="btnRedo" title="Redo (Ctrl+Y)">
+        <i class="fas fa-redo"></i>
+      </button>
+
+      <!-- Close -->
+      <button class="close-btn" id="btnClose" title="Close Toolbar">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <script src="../js/teacher-toolbar-window.js"></script>
+  </body>
+</html>

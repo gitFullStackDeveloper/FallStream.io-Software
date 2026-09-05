@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Setup Your Profile | FallStream.io</title>
+    <script src="../js/page-loader.js"></script>
+
+    <link rel="stylesheet" href="../css/login.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/onboarding.css" />
+  </head>
+  <body>
+    <div class="page-wrap">
+      <!-- ── LEFT PANEL ──────────────────────────────────── -->
+      <div class="left-bg">
+        <div class="grid-lines"></div>
+        <div class="particles" id="particles"></div>
+
+        <div class="left-content">
+          <div class="">
+            <img
+              src="../assets/Gemini_Generated_Image_3sayuy3sayuy3say.png"
+              style="width: 70px; height: auto"
+            />
+          </div>
+
+          <h1 class="animated-gradient-text">Setup Profile</h1>
+          <p class="left-subtitle">
+            Just a few questions to personalize your experience.
+          </p>
+
+          <ul class="feature-list">
+            <li class="feature-item">
+              <span class="feature-icon"><i class="fas fa-bolt"></i></span>
+              Quick 1-minute setup
+            </li>
+            <li class="feature-item">
+              <span class="feature-icon"><i class="fas fa-palette"></i></span>
+              Personalized dashboard
+            </li>
+            <li class="feature-item">
+              <span class="feature-icon"><i class="fas fa-lock"></i></span>
+              Your data stays private
+            </li>
+            <li class="feature-item">
+              <span class="feature-icon"><i class="fas fa-rocket"></i></span>
+              Start recording instantly
+            </li>
+          </ul>
+
+          <div class="secure-badge">
+            <i class="fas fa-shield-alt"></i>
+            All answers are encrypted
+          </div>
+        </div>
+      </div>
+
+      <!-- ── RIGHT PANEL ─────────────────────────────────── -->
+      <div class="right-panel">
+        <div class="form-card">
+          <!-- Steps Indicator -->
+          <div class="steps-indicator">
+            <div class="step-dot active" id="stepDot1"></div>
+            <div class="step-line" id="stepLine1"></div>
+            <div class="step-dot" id="stepDot2"></div>
+            <div class="step-line" id="stepLine2"></div>
+            <div class="step-dot" id="stepDot3"></div>
+            <div class="step-line" id="stepLine3"></div>
+            <div class="step-dot" id="stepDot4"></div>
+          </div>
+
+          <!-- Message area -->
+          <div id="onboardingMessage"></div>
+
+          <!-- ═══ STEP 1: Date of Birth ═══ -->
+          <div class="step-panel active" id="step1">
+            <div class="form-header">
+              <div class="question-icon icon-blue">
+                <i class="fas fa-cake-candles"></i>
+              </div>
+              <h2 class="form-title">When were you born?</h2>
+              <p class="form-subtitle">
+                This helps us personalize your experience
+              </p>
+            </div>
+
+            <label class="onboarding-label">Date of Birth</label>
+            <input type="date" id="dobInput" class="onboarding-input" />
+
+            <div class="btn-row">
+              <button class="btn-next" onclick="nextStep()">
+                Next <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- ═══ STEP 2: Occupation ═══ -->
+          <div class="step-panel" id="step2">
+            <div class="form-header">
+              <div class="question-icon icon-purple">
+                <i class="fas fa-briefcase"></i>
+              </div>
+              <h2 class="form-title">What do you do?</h2>
+              <p class="form-subtitle">
+                Select the option that best describes you
+              </p>
+            </div>
+
+            <div class="option-grid" id="occupationGrid">
+              <div
+                class="option-card"
+                data-value="student"
+                onclick="selectOption(this, 'occupationGrid')"
+              >
+                <i class="fas fa-graduation-cap" style="color: #3b82f6"></i>
+                <span>Student</span>
+              </div>
+              <div
+                class="option-card"
+                data-value="developer"
+                onclick="selectOption(this, 'occupationGrid')"
+              >
+                <i class="fas fa-code" style="color: #8b5cf6"></i>
+                <span>Developer</span>
+              </div>
+              <div
+                class="option-card"
+                data-value="designer"
+                onclick="selectOption(this, 'occupationGrid')"
+              >
+                <i class="fas fa-paint-brush" style="color: #f59e0b"></i>
+                <span>Designer</span>
+              </div>
+              <div
+                class="option-card"
+                data-value="business"
+                onclick="selectOption(this, 'occupationGrid')"
+              >
+                <i class="fas fa-chart-line" style="color: #10b981"></i>
+                <span>Business</span>
+              </div>
+              <div
+                class="option-card"
+                data-value="educator"
+                onclick="selectOption(this, 'occupationGrid')"
+              >
+                <i class="fas fa-chalkboard-teacher" style="color: #06b6d4"></i>
+                <span>Educator</span>
+              </div>
+              <div
+                class="option-card"
+                data-value="other"
+                onclick="selectOption(this, 'occupationGrid')"
+              >
+                <i class="fas fa-ellipsis-h" style="color: #ec4899"></i>
+                <span>Other</span>
+              </div>
+            </div>
+
+            <div class="btn-row">
+              <!-- <button class="btn-back" onclick="prevStep()">
+            <i class="fas fa-arrow-left"></i> Back
+          </button> -->
+              <button
+                class="btn-next"
+                id="occNextBtn"
+                disabled
+                onclick="nextStep()"
+              >
+                Next <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- ═══ STEP 3: Purpose of Use ═══ -->
+          <div class="step-panel" id="step3">
+            <div class="form-header">
+              <div class="question-icon icon-orange">
+                <i class="fas fa-bullseye"></i>
+              </div>
+              <h2 class="form-title">What's your main goal?</h2>
+              <p class="form-subtitle">
+                Tell us how you plan to use FallStream.io
+              </p>
+            </div>
+
+            <div class="option-grid" id="purposeGrid">
+              <div
+                class="option-card"
+                data-value="tutorials"
+                onclick="selectOption(this, 'purposeGrid')"
+              >
+                <i class="fas fa-play-circle" style="color: #3b82f6"></i>
+                <span>Create Tutorials</span>
+              </div>
+              <div
+                class="option-card"
+                data-value="meetings"
+                onclick="selectOption(this, 'purposeGrid')"
+              >
+                <i class="fas fa-users" style="color: #8b5cf6"></i>
+                <span>Record Meetings</span>
+              </div>
+              <div
+                class="option-card"
+                data-value="gaming"
+                onclick="selectOption(this, 'purposeGrid')"
+              >
+                <i class="fas fa-gamepad" style="color: #f59e0b"></i>
+                <span>Game Recording</span>
+              </div>
+              <div
+                class="option-card"
+                data-value="feedback"
+                onclick="selectOption(this, 'purposeGrid')"
+              >
+                <i class="fas fa-comment-dots" style="color: #10b981"></i>
+                <span>Bug Reports/Feedback</span>
+              </div>
+              <div
+                class="option-card"
+                data-value="presentations"
+                onclick="selectOption(this, 'purposeGrid')"
+              >
+                <i class="fas fa-chalkboard-teacher" style="color: #06b6d4"></i>
+                <span>Presentations</span>
+              </div>
+              <div
+                class="option-card"
+                data-value="personal"
+                onclick="selectOption(this, 'purposeGrid')"
+              >
+                <i class="fas fa-smile" style="color: #ec4899"></i>
+                <span>Personal Use</span>
+              </div>
+            </div>
+
+            <div class="btn-row">
+              <!-- <button class="btn-back" onclick="prevStep()">
+            <i class="fas fa-arrow-left"></i> Back
+          </button> -->
+              <button
+                class="btn-next"
+                id="purposeNextBtn"
+                disabled
+                onclick="nextStep()"
+              >
+                Next <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- ═══ STEP 4: Policy Agreement ═══ -->
+          <div class="step-panel" id="step4">
+            <div class="form-header">
+              <div class="question-icon icon-green">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <h2 class="form-title">Almost Done!</h2>
+              <p class="form-subtitle">Please review and agree to continue</p>
+            </div>
+
+            <div class="agreement-card">
+              <h4>📜 Terms & Privacy Policy</h4>
+              <p>
+                By using FallStream.io, you agree to our Terms of Service and
+                Privacy Policy. Your recordings are stored securely and
+                privately. We never share your data with third parties. You can
+                delete your recordings and account at any time.
+              </p>
+            </div>
+
+            <label class="checkbox-row">
+              <input type="checkbox" id="agreeCheckbox" />
+              <span>I agree to the Terms of Service and Privacy Policy</span>
+            </label>
+
+            <div class="btn-row">
+              <button
+                class="btn-next btn-finish"
+                id="finishBtn"
+                disabled
+                onclick="submitOnboarding()"
+              >
+                <i class="fas fa-check"></i> Complete Setup
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/onboarding.js"></script>
+  </body>
+</html>

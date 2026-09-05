@@ -1,0 +1,84 @@
+<script src="../js/page-loader.js"></script>
+
+<aside class="sidebar" id="sidebar">
+  <!-- Grid lines overlay — same as login left panel -->
+  <div class="grid-lines"></div>
+
+  <div class="sidebar-header">
+    <div class="">
+      <!-- <i class="fas fa-video"></i> -->
+      <img
+        src="../assets/screen-recorder-logo.png"
+        style="width: 35px; height: auto"
+      />
+    </div>
+    <span class="logo-text">FallStream.io</span>
+    <button class="sidebar-toggle" id="sidebarToggle" title="Toggle sidebar">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+  </div>
+
+  <nav class="sidebar-nav">
+    <ul>
+      <li class="nav-item" data-page="dashboard">
+        <a href="/dashboard">
+          <i class="fas fa-tachometer-alt"></i>
+          <span class="nav-label">Dashboard</span>
+        </a>
+      </li>
+      <li class="nav-item" data-page="recordings">
+        <a href="/recording">
+          <i class="fas fa-dot-circle"></i>
+          <span class="nav-label">Record</span>
+        </a>
+      </li>
+      <li class="nav-item" data-page="cloud">
+        <a href="/downloads">
+          <i class="fas fa-folder-open"></i>
+          <span class="nav-label">Library</span>
+        </a>
+      </li>
+      <li class="nav-item" data-page="analytics">
+        <a href="/share-analytics">
+          <i class="fas fa-chart-line"></i>
+          <span class="nav-label">Analytics</span>
+        </a>
+      </li>
+
+      <li class="nav-item" data-page="documents">
+        <a href="/documents">
+          <i class="fas fa-book-open"></i>
+          <span class="nav-label">Documents</span>
+        </a>
+      </li>
+      <li class="nav-item" data-page="live">
+        <a href="/live-session">
+          <i class="fas fa-broadcast-tower"></i>
+          <span class="nav-label">Live Session</span>
+        </a>
+      </li>
+
+      <li class="nav-item" data-page="profile">
+        <a href="/profile">
+          <i class="fas fa-user-circle"></i>
+          <span class="nav-label">Profile</span>
+        </a>
+      </li>
+      <li class="nav-item" data-page="feedback">
+        <a href="/feedback">
+          <i class="fas fa-comment-dots"></i>
+          <span class="nav-label">Feedback</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="sidebar-footer">
+    <a href="./login" id="logoutBtn">
+      <i class="fas fa-sign-out-alt"></i>
+      <span class="nav-label">Logout</span>
+    </a>
+  </div>
+</aside>
+
+<script src="../js/sidebar.js"></script>

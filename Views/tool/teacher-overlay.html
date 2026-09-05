@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/teacher-overlay.css" />
+  </head>
+  <body>
+    <canvas id="annotationCanvas"></canvas>
+    <div id="laserDot"></div>
+
+    <!-- Toolbar wrapper — keeps this area always clickable -->
+    <div id="toolbarWrapper">
+      <div id="toolbar">
+        <!-- Power Button -->
+        <button id="btnPower" title="OFF — Click or press P to turn ON">
+          <i class="fas fa-power-off"></i>
+        </button>
+
+        <div class="divider"></div>
+
+        <!-- Drag Handle -->
+        <div id="dragHandle">
+          <i class="fas fa-grip-dots-vertical"></i>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Laser -->
+        <button class="tool-btn active" id="btnLaser" title="Laser (L)">
+          <i class="fas fa-circle"></i>
+        </button>
+
+        <!-- Draw -->
+        <button class="tool-btn" id="btnDraw" title="Draw (D)">
+          <i class="fas fa-pencil-alt"></i>
+        </button>
+
+        <!-- Clear -->
+        <button class="tool-btn" id="btnClear" title="Clear (C)">
+          <i class="fas fa-eraser"></i>
+        </button>
+
+        <div class="divider"></div>
+
+        <!-- Colors -->
+        <div
+          class="color-dot active"
+          data-color="#ef4444"
+          style="background: #ef4444"
+          title="Red"
+        ></div>
+        <div
+          class="color-dot"
+          data-color="#f59e0b"
+          style="background: #f59e0b"
+          title="Yellow"
+        ></div>
+        <div
+          class="color-dot"
+          data-color="#22c55e"
+          style="background: #22c55e"
+          title="Green"
+        ></div>
+        <div
+          class="color-dot"
+          data-color="#3b82f6"
+          style="background: #3b82f6"
+          title="Blue"
+        ></div>
+        <div
+          class="color-dot"
+          data-color="#a855f7"
+          style="background: #a855f7"
+          title="Purple"
+        ></div>
+        <div
+          class="color-dot"
+          data-color="#ffffff"
+          style="background: #fff; border: 2px solid rgba(255, 255, 255, 0.3)"
+          title="White"
+        ></div>
+
+        <div class="divider"></div>
+
+        <!-- Undo -->
+        <button class="tool-btn" id="btnUndo" title="Undo (Ctrl+Z)">
+          <i class="fas fa-undo"></i>
+        </button>
+
+        <!-- Redo -->
+        <button class="tool-btn" id="btnRedo" title="Redo (Ctrl+Y)">
+          <i class="fas fa-redo"></i>
+        </button>
+
+        <div class="divider"></div>
+
+        <!-- Collapse -->
+        <button id="collapseBtn" title="Collapse">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <!-- Close -->
+        <button id="closeBtn" title="Close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+    <script src="../js/teacher-overlay.js"></script>
+  </body>
+</html>

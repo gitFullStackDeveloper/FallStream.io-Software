@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Record | FallStream.io</title>
+    <script src="../js/page-loader.js"></script>
+
+    <link rel="stylesheet" href="../css/sidebar.css" />
+
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <link rel="stylesheet" href="../css/recording.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="app-container">
+      <div id="sidebar-container"></div>
+
+      <main class="main-content">
+        <header class="dashboard-header">
+          <div class="header-left">
+            <h1 class="page-title">Recording Studio</h1>
+            <p class="welcome-msg">Capture your screen in stunning quality</p>
+          </div>
+          <div class="header-right">
+            <!-- <div class="notification-bell"><i class="fas fa-bell"></i><span class="badge">3</span></div> -->
+            <div class="profile-dropdown" id="profileDropdown">
+              <div class="avatar">
+                <img
+                  id="headerAvatar"
+                  src="https://ui-avatars.com/api/?background=2563eb&color=fff&name=User"
+                  alt="avatar"
+                />
+              </div>
+              <span class="profile-name" id="headerName">User</span>
+              <i
+                class="fas fa-chevron-down"
+                style="font-size: 0.7rem; color: var(--gray-400)"
+              ></i>
+              <div class="dropdown-menu">
+                <a href="/profile"
+                  ><i class="fas fa-user"></i> My Profile</a
+                >
+                <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                <hr />
+                <a href="../login" id="logoutBtn"
+                  ><i class="fas fa-sign-out-alt"></i> Logout</a
+                >
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <div class="recording-page">
+          <!-- ═══ FULL WIDTH PREVIEW ═══ -->
+          <div class="preview-wrap" id="previewWrap">
+            <div class="orb1"></div>
+            <div class="orb2"></div>
+
+            <!-- Countdown Overlay -->
+            <div class="countdown-overlay hidden" id="countdownOverlay">
+              <div class="countdown-number" id="countdownNumber">3</div>
+              <p class="countdown-text" id="countdownText">Get Ready...</p>
+            </div>
+
+            <div class="preview-idle" id="previewIdle">
+              <div class="idle-icon">
+                <div class="idle-ring r1"></div>
+                <div class="idle-ring r2"></div>
+                <div class="idle-ring r3"></div>
+                <i class="fas fa-desktop"></i>
+              </div>
+              <p class="idle-title">Ready to Record</p>
+              <p class="idle-sub">
+                Configure options below, then click
+                <strong>Start Recording</strong>
+              </p>
+            </div>
+
+            <video
+              id="screenPreview"
+              autoplay
+              muted
+              playsinline
+              class="screen-preview hidden"
+            ></video>
+
+            <!-- Spotlight effect -->
+            <div class="spotlight-overlay" id="spotlightOverlay"></div>
+
+            <div class="rec-badge hidden" id="recBadge">
+              <span class="rec-dot"></span> REC
+            </div>
+
+            <div class="timer-display hidden" id="timerDisplay">
+              <i
+                class="fas fa-circle"
+                style="font-size: 7px; color: #ef4444"
+              ></i>
+              <span id="timerText">00:00:00</span>
+            </div>
+
+            <!-- FPS Counter -->
+            <div class="fps-counter hidden" id="fpsDisplay">0 FPS</div>
+
+            <!-- Zoom Indicator -->
+            <div class="zoom-indicator" id="zoomIndicator">🔍 1.5x</div>
+
+            <!-- Keystroke Display -->
+            <div class="keystroke-display" id="keystrokeDisplay"></div>
+
+            <div
+              class="webcam-bubble pos-br webcam-shape-circle"
+              id="webcamBubble"
+              style="display: none"
+            >
+              <video id="webcamVideo" autoplay muted playsinline></video>
+              <div
+                class="webcam-off-msg"
+                id="webcamOffMsg"
+                style="display: none"
+              >
+                <i class="fas fa-video-slash"></i>
+              </div>
+            </div>
+
+            <div class="pause-overlay hidden" id="pauseOverlay">
+              <i class="fas fa-pause-circle"></i>
+              <span>Paused</span>
+            </div>
+          </div>
+
+          <!-- ═══ CONTROLS STRIP ═══ -->
+          <div class="controls-strip">
+            <div class="controls-main">
+              <button class="ctrl-btn ctrl-start btn-hover-slide" id="btnStart">
+                <span class="btn-icon"><i class="fas fa-circle"></i></span>
+                <span style="color: white">Start Recording</span>
+              </button>
+              <button class="ctrl-btn ctrl-pause hidden" id="btnPause">
+                <span class="btn-icon"><i class="fas fa-pause"></i></span>
+                <span>Pause</span>
+              </button>
+              <button class="ctrl-btn ctrl-resume hidden" id="btnResume">
+                <span class="btn-icon"><i class="fas fa-play"></i></span>
+                <span>Resume</span>
+              </button>
+              <button class="ctrl-btn ctrl-stop hidden" id="btnStop">
+                <span class="btn-icon"><i class="fas fa-stop"></i></span>
+                <span>Stop & Save</span>
+              </button>
+            </div>
+
+            <div class="ctrl-more-wrap" id="ctrlMoreWrap" style="display: none">
+              <button
+                class="ctrl-more-btn"
+                id="ctrlMoreBtn"
+                title="More options"
+              >
+                <i class="fas fa-ellipsis-v"></i>
+              </button>
+              <div class="ctrl-dropdown" id="ctrlDropdown">
+                <div class="cdrop-divider"></div>
+                <button class="cdrop-item cdrop-danger" id="ddDiscard">
+                  <i class="fas fa-trash"></i> Discard Recording
+                </button>
+                <div class="cdrop-divider"></div>
+                <button class="cdrop-item" id="ddToggleCam">
+                  <i class="fas fa-camera"></i> Toggle Camera
+                </button>
+                <button class="cdrop-item" id="ddToggleMic">
+                  <i class="fas fa-microphone"></i> Toggle Mic
+                </button>
+                <div class="cdrop-divider"></div>
+                <a class="cdrop-item" href="downloads.html">
+                  <i class="fas fa-folder-open"></i> Go to Downloads
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- ═══ SETTINGS ROW ═══ -->
+          <div class="settings-row">
+            <!-- Source -->
+            <div class="settings-card">
+              <div class="settings-card-head">
+                <i class="fas fa-desktop"></i>
+                <span>Source</span>
+              </div>
+              <div class="source-options">
+                <label class="source-opt active" data-val="screen">
+                  <input type="radio" name="source" value="screen" checked />
+                  <div class="source-ico"><i class="fas fa-desktop"></i></div>
+                  <span>Screen</span>
+                </label>
+                <label class="source-opt" data-val="window">
+                  <input type="radio" name="source" value="window" />
+                  <div class="source-ico">
+                    <i class="fas fa-window-restore"></i>
+                  </div>
+                  <span>Window</span>
+                </label>
+                <label class="source-opt" data-val="tab">
+                  <input type="radio" name="source" value="tab" />
+                  <div class="source-ico"><i class="fas fa-globe"></i></div>
+                  <span>Tab</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Camera -->
+            <div class="settings-card" id="camCard">
+              <div class="settings-card-head">
+                <i class="fas fa-camera"></i>
+                <span>Webcam Bubble</span>
+              </div>
+              <div class="toggle-row">
+                <span class="toggle-label">Show camera</span>
+                <label class="switch">
+                  <input type="checkbox" id="toggleCam" />
+                  <span class="slider-track"></span>
+                </label>
+              </div>
+              <div class="cam-settings-inline" id="camSettingsInline">
+                <!-- Shape -->
+                <div class="inline-row">
+                  <span class="setting-sub">Shape</span>
+                  <div class="shape-opts">
+                    <button
+                      class="shape-btn active"
+                      data-shape="circle"
+                      title="Circle"
+                    >
+                      <i class="fas fa-circle"></i>
+                    </button>
+                    <button
+                      class="shape-btn"
+                      data-shape="square"
+                      title="Square"
+                    >
+                      <i class="fas fa-square"></i>
+                    </button>
+                    <button class="shape-btn" data-shape="blob" title="Blob">
+                      <i class="fas fa-droplet"></i>
+                    </button>
+                  </div>
+                </div>
+                <!-- Size -->
+                <div class="inline-row">
+                  <span class="setting-sub">Size</span>
+                  <div class="size-opts">
+                    <button class="size-btn active" data-size="140">S</button>
+                    <button class="size-btn" data-size="180">M</button>
+                    <button class="size-btn" data-size="220">L</button>
+                  </div>
+                </div>
+                <!-- Position -->
+                <div class="inline-row">
+                  <span class="setting-sub">Pos</span>
+                  <div class="pos-grid">
+                    <button
+                      class="pos-btn active"
+                      data-pos="br"
+                      title="Bottom right"
+                    >
+                      ↘
+                    </button>
+                    <button class="pos-btn" data-pos="bl" title="Bottom left">
+                      ↙
+                    </button>
+                    <button class="pos-btn" data-pos="tr" title="Top right">
+                      ↗
+                    </button>
+                    <button class="pos-btn" data-pos="tl" title="Top left">
+                      ↖
+                    </button>
+                  </div>
+                </div>
+                <!-- Border Color -->
+                <div class="inline-row">
+                  <span class="setting-sub">Color</span>
+                  <div class="color-picker-wrap">
+                    <input
+                      type="color"
+                      id="bubbleColorPicker"
+                      value="#3b82f6"
+                      title="Choose any color"
+                    />
+                  </div>
+                </div>
+                <!-- Border Animation -->
+                <div class="inline-row">
+                  <span class="setting-sub">Anim</span>
+                  <button class="border-anim-btn active" data-anim="solid">
+                    Solid
+                  </button>
+                  <button class="border-anim-btn" data-anim="pulse">
+                    Pulse
+                  </button>
+                  <button class="border-anim-btn" data-anim="rainbow">
+                    Rainbow
+                  </button>
+                  <button class="border-anim-btn" data-anim="glow">Glow</button>
+                </div>
+              </div>
+            </div>
+            <!-- Teacher Toolbar -->
+            <div class="settings-card" id="toolbarCard">
+              <div class="settings-card-head">
+                <i class="fas fa-paint-brush"></i>
+                <span> Toolbar</span>
+              </div>
+              <div class="toggle-row">
+                <span class="toggle-label">Show annotation toolbar</span>
+                <label class="switch">
+                  <input type="checkbox" id="toggleToolbar" />
+                  <span class="slider-track"></span>
+                </label>
+              </div>
+            </div>
+            <!-- Audio -->
+            <div class="settings-card">
+              <div class="settings-card-head">
+                <i class="fas fa-microphone"></i>
+                <span>Audio</span>
+              </div>
+              <div class="audio-toggles">
+                <div class="toggle-row">
+                  <span class="toggle-label">Microphone</span>
+                  <label class="switch">
+                    <input type="checkbox" id="toggleMic" checked />
+                    <span class="slider-track"></span>
+                  </label>
+                </div>
+                <div class="toggle-row">
+                  <span class="toggle-label">System Audio</span>
+                  <label class="switch">
+                    <input type="checkbox" id="toggleSysAudio" />
+                    <span class="slider-track"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="mic-meter">
+                <div class="mic-bar" id="micBar"></div>
+              </div>
+              <p class="mic-label" id="micLabel">Mic ready</p>
+            </div>
+
+            <!-- Quality -->
+            <div class="settings-card">
+              <div class="settings-card-head">
+                <i class="fas fa-film"></i>
+                <span>Quality</span>
+              </div>
+              <div class="quality-opts">
+                <label class="q-opt">
+                  <input type="radio" name="quality" value="720" /> 720p HD
+                </label>
+                <label class="q-opt active-q">
+                  <input type="radio" name="quality" value="1080" checked />
+                  1080p FHD
+                </label>
+                <label class="q-opt">
+                  <input type="radio" name="quality" value="1440" /> 1440p QHD
+                </label>
+              </div>
+            </div>
+
+            <!-- Status -->
+            <div class="settings-card status-card-wrap">
+              <div class="settings-card-head">
+                <i class="fas fa-info-circle"></i>
+                <span>Status</span>
+              </div>
+              <div class="status-card">
+                <div class="status-dot idle" id="statusDot"></div>
+                <div>
+                  <p class="status-title" id="statusTitle">Ready</p>
+                  <p class="status-sub" id="statusSub">Configure and start</p>
+                </div>
+              </div>
+              <a
+                href="http://localhost:5000/downloads"
+                class="go-downloads-btn btn-hover-slide"
+              >
+                <i class="fas fa-folder-open"></i>
+                <span style="color: white"> My Recordings </span>
+              </a>
+            </div>
+          </div>
+
+          <!-- ═══ HOW TO USE SECTION ═══ -->
+          <div class="how-to-use-section">
+            <div class="how-to-header">
+              <i class="fas fa-lightbulb"></i>
+              <h3>Pro Tips</h3>
+            </div>
+            <div class="steps-container">
+              <div class="step-item">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                  <h4>Choose Source</h4>
+                  <p>Screen, window, or tab — pick your canvas.</p>
+                </div>
+              </div>
+              <div class="step-item">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                  <h4>Customize Webcam</h4>
+                  <p>Shape, color, animation — make it yours.</p>
+                </div>
+              </div>
+              <div class="step-item">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                  <h4>Use Pro Tools</h4>
+                  <p>Spotlight, zoom, keystrokes — pro control.</p>
+                </div>
+              </div>
+              <div class="step-item">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                  <h4>Save & Access</h4>
+                  <p>Preview, name & save to your library.</p>
+                </div>
+              </div>
+            </div>
+            <p class="how-to-footnote">
+              <i class="fas fa-shield-alt"></i> All recordings saved privately —
+              your data, your control.
+            </p>
+          </div>
+        </div>
+
+        <!-- Save Modal -->
+        <div class="modal-overlay hidden" id="saveModal">
+          <div class="modal-card">
+            <div class="modal-icon"><i class="fas fa-save"></i></div>
+            <h3>Save Recording</h3>
+            <p>Name your recording before saving</p>
+
+            <div class="modal-thumbnail" id="modalThumbnail">
+              <video id="modalThumbVideo" controls muted></video>
+            </div>
+
+            <div class="modal-rec-info">
+              <span class="info-chip"
+                ><i class="fas fa-clock"></i>
+                <span id="recordingDuration">00:00</span></span
+              >
+              <span class="info-chip"
+                ><i class="fas fa-hdd"></i>
+                <span id="recordingSize">0 KB</span></span
+              >
+            </div>
+
+            <input
+              type="text"
+              class="modal-input"
+              id="recordingTitle"
+              placeholder="e.g. Project Demo Q2"
+              maxlength="80"
+            />
+            <div class="modal-actions">
+              <button class="modal-btn-outline" id="btnModalDiscard">
+                <i class="fas fa-trash"></i> Discard
+              </button>
+              <button class="modal-btn-save btn-hover-slide" id="btnModalSave">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <span style="color: white"> Save </span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="toast hidden" id="toast">
+          <i class="fas fa-check-circle"></i>
+          <span id="toastMsg">Done!</span>
+        </div>
+      </main>
+    </div>
+
+    <script src="../js/recording.js"></script>
+  </body>
+</html>

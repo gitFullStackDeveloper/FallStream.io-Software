@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Document Viewer | FallStream.io</title>
+
+    <script src="../js/page-loader.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/sidebar.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <link rel="stylesheet" href="../css/document-viewer.css" />
+  </head>
+  <body>
+    <div id="sidebar-container"></div>
+
+    <div class="main-content" id="mainContent">
+      <header class="dashboard-header">
+        <div class="header-left">
+          <h1 class="page-title">Document Viewer</h1>
+          <p class="welcome-msg">Upload PDFs & annotate during lectures</p>
+        </div>
+        <div class="header-right">
+          <div class="profile-dropdown" id="profileDropdown">
+            <div class="avatar">
+              <img
+                id="headerAvatar"
+                src="https://ui-avatars.com/api/?background=2563eb&color=fff&name=User"
+                alt="avatar"
+              />
+            </div>
+            <span class="profile-name" id="headerName">User</span>
+            <i
+              class="fas fa-chevron-down"
+              style="font-size: 0.7rem; color: var(--gray-400)"
+            ></i>
+            <div class="dropdown-menu">
+              <a href="/profile"><i class="fas fa-user"></i> My Profile</a>
+              <a href="#"><i class="fas fa-cog"></i> Settings</a>
+              <hr />
+              <a href="../login" id="logoutBtn"
+                ><i class="fas fa-sign-out-alt"></i> Logout</a
+              >
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="documents-content">
+        <div class="container">
+          <!-- Stats Cards -->
+          <div class="stats-row" id="statsRow">
+            <div class="stat-card">
+              <div class="stat-icon blue"><i class="fas fa-file-pdf"></i></div>
+              <div class="stat-info">
+                <h4 id="statTotal">0</h4>
+                <p>Total Documents</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon green"><i class="fas fa-file-alt"></i></div>
+              <div class="stat-info">
+                <h4 id="statSize">0 KB</h4>
+                <p>Total Size</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon purple"><i class="fas fa-clock"></i></div>
+              <div class="stat-info">
+                <h4 id="statRecent">—</h4>
+                <p>Recent Upload</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stylish Search Bar + Upload Button -->
+          <div class="search-row">
+            <div class="search-wrap">
+              <i class="fas fa-search search-icon-left" id="searchIcon"></i>
+              <input
+                type="text"
+                class="search-input"
+                id="searchInput"
+                placeholder="Search documents by name..."
+              />
+              <button
+                class="search-clear"
+                id="searchClear"
+                title="Clear search"
+              >
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+            <button
+              class="upload-btn-inline btn-hover-slide"
+              id="uploadBtnInline"
+            >
+              <i class="fas fa-cloud-upload-alt"></i>
+              <span>Upload PDF</span>
+            </button>
+            <!-- <span class="search-hint">Press <kbd>Ctrl</kbd>+<kbd>K</kbd> to search</span> -->
+          </div>
+
+          <!-- Upload Zone -->
+          <div class="upload-zone" id="uploadZone">
+            <div class="upload-icon">
+              <i class="fas fa-cloud-upload-alt"></i>
+            </div>
+            <div class="upload-title">Upload PDF Document</div>
+            <div class="upload-sub">
+              Drag & drop a PDF here or click to browse
+            </div>
+            <input type="file" id="fileInput" accept=".pdf" hidden />
+          </div>
+
+          <div class="section-row">
+            <div class="section-title">
+              <i class="fas fa-folder-open" style="color: var(--blue-500)"></i>
+              Your Documents
+            </div>
+            <span class="result-count" id="resultCount">0 documents</span>
+          </div>
+          <div class="document-grid" id="documentGrid">
+            <div class="empty-state">
+              <i class="fas fa-file-pdf"></i>
+              <h3>No documents yet</h3>
+              <p>Upload a PDF to get started</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Viewer Modal -->
+    <div class="viewer-overlay" id="viewerOverlay">
+      <div class="viewer-container" id="viewerContainer">
+        <div class="viewer-toolbar">
+          <div class="tool-group">
+            <button class="vt-btn" id="btnPrev" disabled>
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <span class="page-indicator"
+              ><span id="currentPage">1</span>/<span id="totalPages"
+                >1</span
+              ></span
+            >
+            <button class="vt-btn" id="btnNext">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+          <div class="tool-group">
+            <button class="vt-btn" id="vtLaser" title="Laser (L)">
+              <i class="fas fa-circle"></i>
+            </button>
+            <button class="vt-btn" id="vtDraw" title="Pen (D)">
+              <i class="fas fa-pencil-alt"></i>
+            </button>
+            <button class="vt-btn" id="vtRect" title="Rectangle (R)">
+              <i class="far fa-square"></i>
+            </button>
+            <button class="vt-btn" id="vtCircle" title="Circle (O)">
+              <i class="far fa-circle"></i>
+            </button>
+            <button class="vt-btn" id="vtEraser" title="Eraser (E)">
+              <i class="fas fa-eraser"></i>
+            </button>
+            <button class="vt-btn" id="vtClear" title="Clear All (C)">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </div>
+          <div class="tool-group" id="colorGroup">
+            <div
+              class="vt-color active"
+              data-color="#ef4444"
+              style="background: #ef4444"
+            ></div>
+            <div
+              class="vt-color"
+              data-color="#f59e0b"
+              style="background: #f59e0b"
+            ></div>
+            <div
+              class="vt-color"
+              data-color="#22c55e"
+              style="background: #22c55e"
+            ></div>
+            <div
+              class="vt-color"
+              data-color="#3b82f6"
+              style="background: #3b82f6"
+            ></div>
+            <div
+              class="vt-color"
+              data-color="#8b5cf6"
+              style="background: #8b5cf6"
+            ></div>
+            <div
+              class="vt-color"
+              data-color="#111827"
+              style="background: #111827; border: 2px solid #d1d5db"
+            ></div>
+          </div>
+          <div class="tool-group">
+            <button class="vt-btn" id="vtUndo" title="Undo (Ctrl+Z)">
+              <i class="fas fa-undo"></i>
+            </button>
+            <button class="vt-btn" id="vtRedo" title="Redo (Ctrl+Y)">
+              <i class="fas fa-redo"></i>
+            </button>
+          </div>
+          <div class="tool-group">
+            <button class="vt-btn" id="btnZoomOut">
+              <i class="fas fa-search-minus"></i>
+            </button>
+            <button class="vt-btn" id="btnZoomIn">
+              <i class="fas fa-search-plus"></i>
+            </button>
+          </div>
+          <div class="viewer-spacer"></div>
+          <button class="vt-btn" id="btnFullscreen" title="Fullscreen (F)">
+            <i class="fas fa-expand"></i>
+          </button>
+          <button class="vt-btn danger" id="btnCloseViewer" title="Close (Esc)">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="viewer-canvas-wrap" id="viewerCanvasWrap">
+          <canvas id="pdfCanvas"></canvas>
+          <canvas id="annotationLayer"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast">
+      <i class="fas fa-check-circle"></i><span id="toastMsg">Done!</span>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/document-viewer.js"></script>
+  </body>
+</html>

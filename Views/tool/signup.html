@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Sign Up | FallStream.io</title>
+    <script src="../js/page-loader.js"></script>
+
+    <link rel="stylesheet" href="../css/login.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="page-wrap">
+      <!-- ── LEFT PANEL ──────────────────────────────────── -->
+      <div class="left-bg">
+        <div class="grid-lines"></div>
+        <div class="particles" id="particles"></div>
+
+        <div class="left-content">
+          <div class="">
+            <img
+              src="../assets/Gemini_Generated_Image_3sayuy3sayuy3say.png"
+              style="width: 70px; height: auto"
+            />
+          </div>
+          <br />
+          <h1 class="animated-gradient-text">Join Us Today</h1>
+          <p class="left-subtitle">
+            Start recording &amp; sharing in minutes. Free for 30 days.
+          </p>
+
+          <ul class="feature-list">
+            <li class="feature-item">
+              <span class="feature-icon"><i class="fas fa-gift"></i></span>
+              Free 30-day trial, no card needed
+            </li>
+            <li class="feature-item">
+              <span class="feature-icon"><i class="fas fa-infinity"></i></span>
+              Unlimited recordings
+            </li>
+            <li class="feature-item">
+              <span class="feature-icon"
+                ><i class="fas fa-layer-group"></i
+              ></span>
+              Team workspace included
+            </li>
+            <li class="feature-item">
+              <span class="feature-icon"><i class="fas fa-headset"></i></span>
+              Priority 24/7 support
+            </li>
+          </ul>
+
+          <div class="secure-badge">
+            <i class="fas fa-shield-alt"></i>
+            100% secure &amp; private data
+          </div>
+        </div>
+      </div>
+
+      <!-- ── RIGHT PANEL ─────────────────────────────────── -->
+      <div class="right-panel">
+        <div class="form-card">
+          <div class="form-header">
+            <div class="form-header-icon">
+              <i class="fas fa-user-plus"></i>
+            </div>
+            <h2 class="form-title">Create account</h2>
+            <p class="form-subtitle">Get started — it's completely free</p>
+          </div>
+
+          <!-- Message area -->
+          <div id="signupMessage"></div>
+
+          <form id="signupForm" autocomplete="off">
+            <div class="field-group">
+              <label class="field-label" for="name">Full name</label>
+              <div class="field-wrap">
+                <i class="fas fa-user field-icon"></i>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  class="form-input"
+                  placeholder="John Doe"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="email">Email address</label>
+              <div class="field-wrap">
+                <i class="fas fa-envelope field-icon"></i>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="form-input"
+                  placeholder="you@example.com"
+                  required
+                  autocomplete="email"
+                />
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="password">Password</label>
+              <div class="field-wrap">
+                <i class="fas fa-lock field-icon"></i>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  class="form-input"
+                  placeholder="Min. 6 characters"
+                  required
+                />
+                <i class="fas fa-eye-slash toggle-password"></i>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="confirmPassword"
+                >Confirm password</label
+              >
+              <div class="field-wrap">
+                <i class="fas fa-shield-check field-icon"></i>
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  class="form-input"
+                  placeholder="Re-enter your password"
+                  required
+                />
+                <i class="fas fa-eye-slash toggle-password-confirm"></i>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              class="btn-gradient btn-hover-slide"
+              id="signupBtn"
+            >
+              <span class="btn-text"
+                ><i class="fas fa-rocket"></i> Create Account</span
+              >
+              <span class="btn-spinner" style="display: none"
+                ><i class="fas fa-spinner fa-spin"></i> Creating
+                account...</span
+              >
+            </button>
+          </form>
+
+          <p class="form-footer">
+            Already have an account? <a href="/login">Sign in</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/login.js"></script>
+  </body>
+</html>

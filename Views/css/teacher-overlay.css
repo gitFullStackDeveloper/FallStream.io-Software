@@ -1,0 +1,283 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent !important;
+  font-family: "Segoe UI", "Plus Jakarta Sans", sans-serif;
+}
+
+/* ═══ ANNOTATION CANVAS ═══ */
+#annotationCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+#annotationCanvas.drawing-mode {
+  pointer-events: auto;
+  cursor: crosshair;
+}
+
+/* ═══ LASER DOT ═══ */
+#laserDot {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  display: none;
+  z-index: 2;
+  background: radial-gradient(
+    circle,
+    rgba(239, 68, 68, 0.9) 0%,
+    rgba(239, 68, 68, 0.3) 40%,
+    transparent 70%
+  );
+  box-shadow: 0 0 28px 10px rgba(239, 68, 68, 0.6);
+  animation: laserPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes laserPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 18px 6px rgba(239, 68, 68, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 36px 14px rgba(239, 68, 68, 0.9);
+  }
+}
+
+/* ═══ SLIM TOOLBAR — ALWAYS CLICKABLE ═══ */
+#toolbar {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 6px 5px;
+  background: rgba(15, 23, 42, 0.93);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: 14px;
+  box-shadow:
+    0 10px 32px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(56, 189, 248, 0.25);
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: auto !important; /* ⬅️ ALWAYS CLICKABLE */
+  transition: all 0.3s ease;
+  width: 44px;
+}
+
+#toolbar.collapsed {
+  right: -38px;
+  opacity: 0.2;
+}
+#toolbar.collapsed:hover {
+  right: -4px;
+  opacity: 1;
+}
+
+/* ═══ POWER BUTTON ═══ */
+#btnPower {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid rgba(239, 68, 68, 0.5);
+  background: rgba(239, 68, 68, 0.12);
+  color: #ef4444;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s;
+  pointer-events: auto !important;
+  flex-shrink: 0;
+}
+#btnPower:hover {
+  transform: scale(1.1);
+  border-color: rgba(239, 68, 68, 0.8);
+  background: rgba(239, 68, 68, 0.22);
+}
+#btnPower.on {
+  border-color: rgba(34, 197, 94, 0.5);
+  background: rgba(34, 197, 94, 0.12);
+  color: #22c55e;
+  box-shadow: 0 0 14px rgba(34, 197, 94, 0.25);
+  animation: powerGlow 2s ease-in-out infinite;
+}
+@keyframes powerGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 22px rgba(34, 197, 94, 0.5);
+  }
+}
+#btnPower.on:hover {
+  border-color: rgba(34, 197, 94, 0.8);
+  background: rgba(34, 197, 94, 0.22);
+}
+
+/* ═══ TOOL BUTTONS ═══ */
+.tool-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  pointer-events: auto !important;
+  flex-shrink: 0;
+}
+.tool-btn:hover {
+  background: rgba(56, 189, 248, 0.18);
+  border-color: rgba(56, 189, 248, 0.45);
+  color: #fff;
+  transform: scale(1.06);
+}
+.tool-btn:active {
+  transform: scale(0.92);
+}
+.tool-btn.active {
+  background: rgba(56, 189, 248, 0.28);
+  border-color: rgba(56, 189, 248, 0.65);
+  color: #38bdf8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+}
+
+/* ═══ COLOR DOTS ═══ */
+.color-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s;
+  pointer-events: auto !important;
+  flex-shrink: 0;
+}
+.color-dot:hover {
+  transform: scale(1.2);
+  border-color: #fff;
+}
+.color-dot.active {
+  border-color: #fff;
+  box-shadow: 0 0 10px currentColor;
+}
+
+/* ═══ DIVIDER ═══ */
+.divider {
+  width: 75%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 2px 0;
+  flex-shrink: 0;
+}
+
+/* ═══ DISABLED STATE ═══ */
+#toolbar.disabled .tool-btn,
+#toolbar.disabled .color-dot {
+  opacity: 0.3;
+  pointer-events: none !important;
+}
+
+/* ═══ DRAG HANDLE ═══ */
+#dragHandle {
+  width: 100%;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.45rem;
+  flex-shrink: 0;
+  pointer-events: auto !important;
+}
+#dragHandle:active {
+  cursor: grabbing;
+}
+
+/* ═══ CLOSE BUTTON ═══ */
+#closeBtn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(239, 68, 68, 0.12);
+  color: rgba(239, 68, 68, 0.6);
+  font-size: 0.65rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  pointer-events: auto !important;
+  flex-shrink: 0;
+}
+#closeBtn:hover {
+  background: rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+  transform: scale(1.1);
+}
+
+/* ═══ COLLAPSE ═══ */
+#collapseBtn {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 0.6rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  pointer-events: auto !important;
+  flex-shrink: 0;
+}
+#collapseBtn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+/* ═══ TOOLBAR WRAPPER — keeps toolbar area clickable ═══ */
+#toolbarWrapper {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 70px;
+  height: 100%;
+  z-index: 9;
+  pointer-events: auto !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

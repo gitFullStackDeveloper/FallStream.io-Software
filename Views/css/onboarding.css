@@ -1,0 +1,330 @@
+/* ═══════════════ SLIGHTLY WIDER FORM ═══════════════ */
+.right-panel {
+  max-width: 700px;
+}
+
+.form-card {
+  padding: 2.5rem 2.5rem;
+}
+
+/* ═══════════════ STEPS INDICATOR ═══════════════ */
+.steps-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 2rem;
+}
+.step-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--gray-300);
+  transition: all 0.3s;
+}
+.step-dot.active {
+  background: var(--blue-500);
+  box-shadow: 0 0 10px rgba(37, 99, 235, 0.4);
+  width: 12px;
+  height: 12px;
+}
+.step-dot.done {
+  background: #22c55e;
+}
+.step-line {
+  width: 30px;
+  height: 2px;
+  background: var(--gray-300);
+  transition: background 0.3s;
+}
+.step-line.done {
+  background: #22c55e;
+}
+
+/* ═══════════════ STEP PANELS ═══════════════ */
+.step-panel {
+  display: none;
+  animation: fadeUp 0.4s ease both;
+}
+.step-panel.active {
+  display: block;
+}
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ═══════════════ QUESTION ICONS ═══════════════ */
+.question-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+.icon-blue {
+  background: #eff6ff;
+  color: #3b82f6;
+}
+.icon-purple {
+  background: #faf5ff;
+  color: #8b5cf6;
+}
+.icon-orange {
+  background: #fff7ed;
+  color: #f97316;
+}
+.icon-green {
+  background: #f0fdf4;
+  color: #22c55e;
+}
+
+/* ═══════════════ FORM ELEMENTS ═══════════════ */
+.onboarding-label {
+  font-weight: 600;
+  color: var(--gray-700);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.onboarding-input {
+  width: 100%;
+  padding: 14px 18px;
+  border: 2px solid var(--gray-200);
+  border-radius: 14px;
+  font-size: 1rem;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  transition: all 0.3s;
+  outline: none;
+  background: var(--gray-50);
+  color: var(--gray-800);
+}
+
+.onboarding-input:focus {
+  border-color: var(--blue-400);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+  background: #fff;
+}
+
+/* ═══════════════ OPTION CARDS ═══════════════ */
+.option-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.7rem;
+}
+
+.option-card {
+  padding: 1rem 0.8rem;
+  border: 2px solid var(--gray-200);
+  border-radius: 16px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.25s;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.option-card:hover {
+  border-color: var(--blue-300);
+  background: #f8faff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.option-card.selected {
+  border-color: var(--blue-500);
+  background: #eff6ff;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+.option-card i {
+  font-size: 1.4rem;
+}
+
+.option-card span {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--gray-700);
+  line-height: 1.2;
+}
+
+/* ═══════════════ AGREEMENT CARD ═══════════════ */
+.agreement-card {
+  background: #f8fafc;
+  border: 1px solid var(--gray-200);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.agreement-card h4 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--gray-800);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.agreement-card p {
+  font-size: 0.8rem;
+  color: var(--gray-500);
+  line-height: 1.6;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  padding: 0.5rem 0;
+}
+
+.checkbox-row input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  accent-color: var(--blue-500);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.checkbox-row span {
+  font-size: 0.85rem;
+  color: var(--gray-700);
+  font-weight: 500;
+}
+
+/* ═══════════════ BUTTONS ═══════════════ */
+.btn-row {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.8rem;
+}
+
+.btn-back {
+  padding: 12px 24px;
+  border: 2px solid var(--gray-200);
+  border-radius: 40px;
+  background: transparent;
+  color: var(--gray-500);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: inherit;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-back:hover {
+  border-color: var(--gray-400);
+  color: var(--gray-700);
+}
+
+.btn-next {
+  flex: 1;
+  padding: 14px 24px;
+  background: linear-gradient(135deg, var(--blue-500), #1d4ed8);
+  border: none;
+  border-radius: 40px;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: inherit;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+}
+
+.btn-next:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.4);
+}
+
+.btn-next:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-finish {
+  background: linear-gradient(135deg, #10b981, #059669) !important;
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.25) !important;
+}
+
+.btn-finish:hover {
+  box-shadow: 0 10px 24px rgba(16, 185, 129, 0.4) !important;
+}
+
+/* ═══════════════ MESSAGE BOX ═══════════════ */
+.msg-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  animation: slideDown 0.3s ease;
+}
+.msg-box.error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+}
+.msg-box.error i {
+  color: #ef4444;
+}
+.msg-box.success {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #065f46;
+}
+.msg-box.success i {
+  color: #22c55e;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 500px) {
+  .option-grid {
+    grid-template-columns: 1fr;
+  }
+  .btn-row {
+    flex-direction: column;
+  }
+  .btn-back {
+    justify-content: center;
+  }
+}

@@ -1,0 +1,12 @@
+S-Recorder - License Agreement
+
+Copyright (c) 2025 S-Recorder
+
+This software is provided 'as-is', without any express or implied warranty.
+
+You may not:
+- Sell or redistribute this software
+- Modify and distribute without permission
+- Use the name "S-Recorder" without permission
+
+For support: support@s-recorder

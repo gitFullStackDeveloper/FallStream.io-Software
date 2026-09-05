@@ -1,0 +1,448 @@
+:root {
+  --navy-950: #040d1a;
+  --blue-500: #2563eb;
+  --blue-400: #3b82f6;
+  --accent: #38bdf8;
+  --white: #ffffff;
+  --gray-50: #f8fafc;
+  --gray-200: #e2e8f0;
+  --gray-500: #64748b;
+  --gray-700: #334155;
+  --gray-800: #1e293b;
+  --radius-2xl: 36px;
+  --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-glow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+}
+
+.pricing-page-body {
+  background: var(--gray-50);
+  position: relative;
+  overflow-x: hidden;
+}
+
+.pricing-page-body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(
+      ellipse at 15% 20%,
+      rgba(37, 99, 235, 0.03) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse at 85% 70%,
+      rgba(56, 189, 248, 0.04) 0%,
+      transparent 55%
+    );
+}
+
+/* ── HERO BADGE ───────────────────────────────── */
+.pricing-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(37, 99, 235, 0.07);
+  border: 1px solid rgba(37, 99, 235, 0.18);
+  padding: 8px 18px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--blue-500);
+  letter-spacing: 0.03em;
+  margin-bottom: 1.6rem;
+  animation: fadeInUp 0.6s ease-out;
+}
+.pricing-hero-badge .badge-pulse {
+  width: 9px;
+  height: 9px;
+  background: var(--blue-500);
+  border-radius: 50%;
+  animation: pulse-dot 1.8s infinite;
+}
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.6);
+  }
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── PRICING HERO ──────────────────────────────── */
+.pricing-hero {
+  position: relative;
+  padding: 5rem 2rem 2rem;
+  text-align: center;
+  z-index: 1;
+}
+.pricing-hero-title {
+  font-family: "Outfit", sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  color: var(--gray-800);
+  margin: 0.8rem 0 1.2rem;
+  letter-spacing: -0.02em;
+  animation: fadeInUp 0.6s ease-out 0.1s both;
+}
+.pricing-hero-subtitle {
+  font-size: 1.15rem;
+  color: var(--gray-500);
+  max-width: 550px;
+  margin: 0 auto;
+  line-height: 1.6;
+  animation: fadeInUp 0.6s ease-out 0.2s both;
+}
+
+/* ── BILLING TOGGLE ────────────────────────────── */
+.billing-toggle-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2.5rem 0 1rem;
+  flex-wrap: wrap;
+  animation: fadeInUp 0.6s ease-out 0.25s both;
+}
+
+.toggle-buttons {
+  display: flex;
+  background: var(--white);
+  border-radius: 50px;
+  border: 1px solid var(--gray-200);
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.toggle-btn {
+  padding: 10px 28px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--gray-700);
+  transition: all 0.3s;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  outline: none;
+}
+.toggle-btn.active {
+  background: linear-gradient(145deg, var(--blue-500), #1d4ed8);
+  color: white;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+  border-radius: 50px;
+}
+
+/* ── SAVE BADGE WITH WATER RIPPLE ──────────────── */
+.save-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #dcfce7;
+  color: #15803d;
+  padding: 6px 18px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  border: 1px solid #bbf7d0;
+  z-index: 1;
+  overflow: visible;
+  /* Ripple effect pseudo element */
+  margin-left: 0.5rem;
+}
+
+.save-badge::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: rgba(34, 197, 94, 0.2);
+  transform: translate(-50%, -50%) scale(1);
+  animation: water-ripple 2s ease-out infinite;
+  z-index: -1;
+}
+.save-badge::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: rgba(34, 197, 94, 0.15);
+  transform: translate(-50%, -50%) scale(1);
+  animation: water-ripple 2s ease-out 0.6s infinite;
+  z-index: -1;
+}
+
+@keyframes water-ripple {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.8);
+    opacity: 0;
+  }
+}
+
+/* ── PRICING CARDS ──────────────────────────────── */
+.pricing-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem 2rem 4rem;
+  position: relative;
+  z-index: 1;
+}
+
+.pricing-card {
+  background: var(--white);
+  border-radius: var(--radius-2xl);
+  padding: 2.5rem 2rem;
+  border: 1px solid var(--gray-200);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+  flex: 1 1 300px;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  position: relative;
+  overflow: hidden;
+}
+.pricing-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+  border-color: #bfdbfe;
+}
+.pricing-card.popular {
+  border: 2px solid var(--blue-500);
+  box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.07);
+  transform: scale(1.03);
+}
+.pricing-card.popular:hover {
+  transform: scale(1.03) translateY(-8px);
+}
+.popular-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: linear-gradient(135deg, var(--blue-500), #1d4ed8);
+  color: white;
+  padding: 5px 14px;
+  border-radius: 30px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  box-shadow: 0 6px 12px rgba(37, 99, 235, 0.25);
+}
+
+.plan-name {
+  font-family: "Outfit", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--gray-800);
+  margin-bottom: 0.3rem;
+}
+.plan-price {
+  font-size: 1rem;
+  color: var(--gray-500);
+  margin-bottom: 1.8rem;
+}
+.price-number {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--gray-800);
+  font-family: "Outfit", sans-serif;
+  line-height: 1;
+}
+.price-period {
+  font-size: 0.9rem;
+  color: var(--gray-400);
+}
+.original-price {
+  text-decoration: line-through;
+  font-size: 1rem;
+  color: var(--gray-400);
+  margin-right: 8px;
+  display: none; /* shown only in yearly mode */
+}
+.plan-features-list {
+  list-style: none;
+  margin-bottom: 2rem;
+  flex: 1;
+}
+.plan-features-list li {
+  padding: 0.65rem 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--gray-700);
+  font-size: 0.95rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+.plan-features-list li i.fa-check {
+  color: #22c55e;
+}
+.plan-features-list li i.fa-minus {
+  color: #94a3b8;
+}
+
+.pricing-card .btn-gradient,
+.pricing-card .btn-outline {
+  width: 100%;
+  justify-content: center;
+  font-size: 0.95rem;
+  padding: 12px 20px;
+  margin-top: auto;
+}
+
+/* ── FAQ & CTA (unchanged) ───────────────────────── */
+.faq-section {
+  background: white;
+  border-top: 1px solid #f1f5f9;
+  padding: 4rem 2rem;
+}
+.faq-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.faq-item {
+  border-bottom: 1px solid #e2e8f0;
+  padding: 1.2rem 0;
+}
+.faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--gray-800);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+.faq-question:hover {
+  color: var(--blue-500);
+}
+.faq-question i {
+  color: var(--blue-500);
+  transition: transform 0.3s;
+}
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s;
+  color: #64748b;
+  line-height: 1.7;
+}
+.faq-item.active .faq-answer {
+  max-height: 250px;
+  padding-bottom: 0.5rem;
+}
+.faq-item.active .faq-question i {
+  transform: rotate(180deg);
+}
+
+/* responsive */
+@media (max-width: 768px) {
+  .pricing-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+  .pricing-card {
+    max-width: 400px;
+    width: 100%;
+  }
+  .pricing-card.popular {
+    transform: none;
+  }
+  .pricing-card.popular:hover {
+    transform: translateY(-8px);
+  }
+  .billing-toggle-wrapper {
+    flex-direction: column;
+  }
+}
+
+.pricing-hero-badge,
+.pricing-hero-title,
+.pricing-hero-subtitle {
+  animation: none; /* disable the old fadeInUp */
+}
+
+.reveal {
+  opacity: 0;
+  transition:
+    opacity 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.reveal.revealed {
+  opacity: 1;
+}
+.reveal-fade-up {
+  transform: translateY(40px);
+}
+.reveal-fade-up.revealed {
+  transform: translateY(0);
+}
+.reveal-fade-right {
+  transform: translateX(60px);
+}
+.reveal-fade-right.revealed {
+  transform: translateX(0);
+}
+
+/* ═══════════════════════════════════════════════
+   CUSTOM SCROLLBAR — Professional Gray-Blue
+   ═══════════════════════════════════════════════ */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f1f5f9;
+}

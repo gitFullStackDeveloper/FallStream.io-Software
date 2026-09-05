@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Feedback | FallStream.io</title>
+    <script src="../js/page-loader.js"></script>
+
+    <!-- ✅ Same CSS as dashboard -->
+    <link rel="stylesheet" href="../css/sidebar.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/feedback.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Sidebar container – will be filled with sidebar.html (same as dashboard) -->
+      <div id="sidebar-container"></div>
+
+      <main class="main-content">
+        <!-- ═══ HEADER – exactly like the dashboard ═══ -->
+        <header class="dashboard-header">
+          <div class="header-left">
+            <h1 class="page-title">Send Feedback</h1>
+            <p class="welcome-msg" id="welcomeMessage">Welcome back</p>
+          </div>
+          <div class="header-right">
+            <div class="header-right">
+              <div class="profile-dropdown" id="profileDropdown">
+                <div class="avatar">
+                  <img
+                    id="headerAvatar"
+                    src="https://ui-avatars.com/api/?background=2563eb&color=fff&name=User"
+                    alt="avatar"
+                  />
+                </div>
+                <span class="profile-name" id="headerName">User</span>
+                <i
+                  class="fas fa-chevron-down"
+                  style="font-size: 0.7rem; color: var(--gray-400)"
+                ></i>
+                <div class="dropdown-menu">
+                  <a href="/profile"
+                    ><i class="fas fa-user"></i> My Profile</a
+                  >
+                  <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                  <hr />
+                  <a href="../login" id="logoutBtn"
+                    ><i class="fas fa-sign-out-alt"></i> Logout</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- ═══ FEEDBACK FORM ═══ -->
+        <div class="dashboard-content">
+          <div class="feedback-card">
+            <h2>We value your opinion</h2>
+            <div id="alertContainer"></div>
+            <form id="feedbackForm">
+              <div class="form-group">
+                <label for="feedbackMsg">Your message</label>
+                <textarea
+                  id="feedbackMsg"
+                  placeholder="Tell us what you think about FallStream.io..."
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" class="submit-btn btn-hover-slide">
+                <i class="fas fa-paper-plane"></i
+                ><span style="color: white"> Submit Feedback </span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="../js/feedback.js"></script>
+  </body>
+</html>

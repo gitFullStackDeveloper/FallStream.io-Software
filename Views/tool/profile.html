@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Profile | FallStream.io</title>
+    <script src="../js/page-loader.js"></script>
+
+    <link rel="stylesheet" href="../css/sidebar.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <link rel="stylesheet" href="../css/profile.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="app-container">
+      <div id="sidebar-container"></div>
+
+      <main class="main-content">
+        <!-- Top Bar -->
+        <header class="dashboard-header">
+          <div class="header-left">
+            <h1 class="page-title">Profile & Settings</h1>
+            <p class="welcome-msg">Manage your account preferences</p>
+          </div>
+          <div class="header-right">
+            <!-- <div class="notification-bell"><i class="fas fa-bell"></i><span class="badge">3</span></div> -->
+            <div class="profile-dropdown" id="profileDropdown">
+              <div class="avatar">
+                <img
+                  id="headerAvatar"
+                  src="https://ui-avatars.com/api/?background=2563eb&color=fff&name=User"
+                  alt="avatar"
+                />
+              </div>
+              <span class="profile-name" id="headerName">User</span>
+              <i
+                class="fas fa-chevron-down"
+                style="font-size: 0.7rem; color: var(--gray-400)"
+              ></i>
+              <div class="dropdown-menu">
+                <a href="/profile"
+                  ><i class="fas fa-user"></i> My Profile</a
+                >
+                <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                <hr />
+                <a href="../login" id="logoutBtn"
+                  ><i class="fas fa-sign-out-alt"></i> Logout</a
+                >
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- ═══ SETTINGS WRAPPER ═══ -->
+        <div class="profile-wrapper">
+          <!-- ══ LEFT PANEL ══ -->
+          <div class="profile-left">
+            <div class="pcard">
+              <div class="pcard-banner"></div>
+              <div class="pcard-body">
+                <!-- Spinning avatar ring -->
+
+                <div
+                  class="avatar-ring"
+                  id="avatarRing"
+                  title="Click to change photo"
+                  onclick="document.getElementById('imgFileInput').click()"
+                >
+                  <div class="avatar-inner" id="avatarInner">
+                    <img
+                      id="avatarImg"
+                      src=""
+                      alt="Profile"
+                      style="display: none"
+                    />
+                    <span id="avatarInitials">?</span>
+                    <div class="avatar-cam-overlay">
+                      <i class="fas fa-camera"></i>
+                    </div>
+                  </div>
+                  <div class="avatar-online"></div>
+                </div>
+                <input
+                  type="file"
+                  id="imgFileInput"
+                  accept="image/jpeg,image/png,image/gif,image/webp"
+                  style="display: none"
+                  onchange="previewImage(this)"
+                />
+                <br />
+                <div class="pcard-name" id="pcardName">Loading…</div>
+                <div class="pcard-email" id="pcardEmail"></div>
+                <div class="pcard-phone hidden" id="pcardPhone">
+                  <i class="fas fa-phone"></i><span id="pcardPhoneVal"></span>
+                </div>
+
+                <div
+                  style="
+                    display: flex;
+                    justify-content: center;
+                    margin: 0.5rem 0 0.4rem;
+                  "
+                >
+                  <span class="role-badge role-member"
+                    ><i class="fas fa-video"></i> Pro Member</span
+                  >
+                </div>
+
+                <div class="pcard-divider"></div>
+
+                <!-- Vertical tabs -->
+                <div class="vtabs">
+                  <button
+                    class="vtab active"
+                    id="vtab-profile"
+                    onclick="switchTab('profile')"
+                  >
+                    <div class="vtab-icon">
+                      <i class="fas fa-user-edit"></i>
+                    </div>
+                    <span class="vtab-label">Edit Profile</span>
+                    <i class="fas fa-chevron-right vtab-arrow"></i>
+                  </button>
+                  <button
+                    class="vtab"
+                    id="vtab-security"
+                    onclick="switchTab('security')"
+                  >
+                    <div class="vtab-icon">
+                      <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <span class="vtab-label">Security</span>
+                    <i class="fas fa-chevron-right vtab-arrow"></i>
+                  </button>
+                  <button
+                    class="vtab"
+                    id="vtab-account"
+                    onclick="switchTab('account')"
+                  >
+                    <div class="vtab-icon"><i class="fas fa-id-card"></i></div>
+                    <span class="vtab-label">Account Info</span>
+                    <i class="fas fa-chevron-right vtab-arrow"></i>
+                  </button>
+                  <a
+                    href="../login"
+                    id="logoutBtn"
+                    style="text-decoration: none"
+                  >
+                    <button class="vtab vtab-logout">
+                      <div class="vtab-icon">
+                        <i class="fas fa-sign-out-alt"></i>
+                      </div>
+                      <span class="vtab-label">Sign Out</span>
+                    </button></a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══ RIGHT PANEL ══ -->
+          <div class="profile-right">
+            <!-- Alert area -->
+            <div id="alertArea"></div>
+
+            <!-- TAB 1: EDIT PROFILE -->
+            <div class="tab-panel active" id="tab-profile">
+              <div class="glass-card">
+                <div class="glass-card-header">
+                  <div class="card-section-icon">
+                    <i class="fas fa-user-edit"></i>
+                  </div>
+                  <div>
+                    <h2 class="card-section-title">Edit Profile</h2>
+                    <p class="card-section-sub">
+                      Update your personal information
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Photo upload section -->
+                <div class="photo-upload-section">
+                  <div class="photo-upload-label">
+                    <i class="fas fa-camera"></i> Profile Photo
+                  </div>
+                  <div class="photo-upload-wrap">
+                    <div class="photo-preview" id="photoPreview">
+                      <img
+                        id="photoPreviewImg"
+                        src=""
+                        alt=""
+                        style="
+                          display: none;
+                          width: 100%;
+                          height: 100%;
+                          object-fit: cover;
+                          border-radius: 50%;
+                        "
+                      />
+                      <!-- CHANGED: replaced <span>?</span> with a male person SVG icon -->
+                      <svg
+                        id="photoPreviewInitials"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        style="width: 52px; height: 52px; color: #fff"
+                      >
+                        <path
+                          d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"
+                        />
+                      </svg>
+                    </div>
+                    <div class="photo-upload-controls">
+                      <p class="photo-hint">
+                        JPG, PNG, GIF, WebP — max <span>2 MB</span>
+                      </p>
+                      <div
+                        style="
+                          display: flex;
+                          flex-wrap: wrap;
+                          gap: 0.5rem;
+                          align-items: center;
+                        "
+                      >
+                        <label class="btn-choose-photo" for="imgFileInput">
+                          <i class="fas fa-upload"></i> Choose Photo
+                        </label>
+                        <button
+                          class="btn-upload-photo hidden"
+                          id="btnUploadPhoto"
+                          onclick="uploadPhoto()"
+                        >
+                          <i class="fas fa-cloud-upload-alt"></i> Upload
+                        </button>
+                        <button
+                          class="btn-clear-photo hidden"
+                          id="btnClearPhoto"
+                          onclick="clearPhotoSelection()"
+                        >
+                          <i class="fas fa-times"></i> Clear
+                        </button>
+                      </div>
+                      <div
+                        class="photo-selected-badge hidden"
+                        id="photoSelectedBadge"
+                      >
+                        <i class="fas fa-check-circle"></i>
+                        <span id="photoSelectedName"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Profile form -->
+                <form id="profileForm" onsubmit="saveProfile(event)">
+                  <div class="fsection-label">
+                    <i class="fas fa-user"></i> Basic Info
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="flabel">Full Name</label>
+                      <div class="finput-wrap">
+                        <i class="fas fa-user flead-icon"></i>
+                        <input
+                          type="text"
+                          id="fieldName"
+                          name="name"
+                          class="finput"
+                          placeholder="Your full name"
+                          oninput="liveUpdateName(this.value)"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="flabel">Email Address</label>
+                      <div class="finput-wrap">
+                        <i class="fas fa-envelope flead-icon"></i>
+                        <input
+                          type="email"
+                          id="fieldEmail"
+                          name="email"
+                          class="finput"
+                          placeholder="you@example.com"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="fsection-label">
+                    <i class="fas fa-address-book"></i> Contact Info
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="flabel">Phone Number</label>
+                      <div class="finput-wrap">
+                        <i class="fas fa-phone flead-icon"></i>
+                        <input
+                          type="text"
+                          id="fieldPhone"
+                          name="phone"
+                          class="finput"
+                          placeholder="+1 234 567 8900"
+                          oninput="liveUpdatePhone(this.value)"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="flabel">Location</label>
+                      <div class="finput-wrap">
+                        <i class="fas fa-map-marker-alt flead-icon"></i>
+                        <input
+                          type="text"
+                          id="fieldAddress"
+                          name="address"
+                          class="finput"
+                          placeholder="City, Country"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="fsection-label">
+                    <i class="fas fa-pen"></i> About
+                  </div>
+                  <div class="form-group">
+                    <label class="flabel"
+                      >Bio
+                      <span style="opacity: 0.4; font-weight: 400"
+                        >(optional)</span
+                      ></label
+                    >
+                    <div class="finput-wrap">
+                      <i
+                        class="fas fa-align-left flead-icon"
+                        style="top: 1.1rem; transform: none"
+                      ></i>
+                      <textarea
+                        id="fieldBio"
+                        name="bio"
+                        rows="3"
+                        class="finput finput-ta"
+                        placeholder="A short bio about yourself…"
+                        maxlength="500"
+                        oninput="updateCharCount(this.value)"
+                      ></textarea>
+                    </div>
+                    <div class="char-counter" id="charCounter">0 / 500</div>
+                  </div>
+
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: flex-end;
+                      padding-top: 0.5rem;
+                    "
+                  >
+                    <button type="submit" class="btn-primary btn-hover-slide">
+                      <i class="fas fa-save"></i> <span> Save Changes </span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <!-- TAB 2: SECURITY -->
+            <div class="tab-panel" id="tab-security">
+              <div class="glass-card">
+                <div class="glass-card-header">
+                  <div
+                    class="card-section-icon"
+                    style="
+                      background: linear-gradient(135deg, #ef4444, #dc2626);
+                    "
+                  >
+                    <i class="fas fa-shield-alt"></i>
+                  </div>
+                  <div>
+                    <h2 class="card-section-title">Change Password</h2>
+                    <p class="card-section-sub">Keep your account secure</p>
+                  </div>
+                </div>
+
+                <form id="passwordForm" onsubmit="changePassword(event)">
+                  <div class="form-group">
+                    <label class="flabel">Current Password</label>
+                    <div class="finput-wrap">
+                      <i class="fas fa-lock flead-icon"></i>
+                      <input
+                        type="password"
+                        id="currentPw"
+                        class="finput"
+                        placeholder="Enter current password"
+                      />
+                      <button
+                        type="button"
+                        class="pw-toggle-btn"
+                        onclick="togglePw('currentPw', this)"
+                      >
+                        <i class="fas fa-eye"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="flabel">New Password</label>
+                      <div class="finput-wrap">
+                        <i class="fas fa-key flead-icon"></i>
+                        <input
+                          type="password"
+                          id="newPw"
+                          class="finput"
+                          placeholder="Min. 8 characters"
+                          oninput="updateStrength(this.value)"
+                        />
+                        <button
+                          type="button"
+                          class="pw-toggle-btn"
+                          onclick="togglePw('newPw', this)"
+                        >
+                          <i class="fas fa-eye"></i>
+                        </button>
+                      </div>
+                      <div class="strength-wrap">
+                        <div class="strength-fill" id="strengthBar"></div>
+                      </div>
+                      <div class="strength-text" id="strengthLabel">
+                        Enter a new password
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="flabel">Confirm New Password</label>
+                      <div class="finput-wrap">
+                        <i class="fas fa-key flead-icon"></i>
+                        <input
+                          type="password"
+                          id="confirmPw"
+                          class="finput"
+                          placeholder="Repeat new password"
+                        />
+                        <button
+                          type="button"
+                          class="pw-toggle-btn"
+                          onclick="togglePw('confirmPw', this)"
+                        >
+                          <i class="fas fa-eye"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: flex-end;
+                      padding-top: 0.5rem;
+                    "
+                  >
+                    <button type="submit" class="btn-danger btn-hover-slide">
+                      <i class="fas fa-lock"></i>
+                      <span style="color: white"> Update Password </span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <!-- TAB 3: ACCOUNT INFO -->
+            <div class="tab-panel" id="tab-account">
+              <div class="glass-card">
+                <div class="glass-card-header">
+                  <div class="card-section-icon">
+                    <i class="fas fa-id-card"></i>
+                  </div>
+                  <div>
+                    <h2 class="card-section-title">Account Information</h2>
+                    <p class="card-section-sub">
+                      Your account details — read only
+                    </p>
+                  </div>
+                </div>
+
+                <div class="stat-pills">
+                  <div class="stat-pill">
+                    <div class="stat-pill-val" id="statRecordings">—</div>
+                    <div class="stat-pill-lbl">Recordings</div>
+                  </div>
+                  <div class="stat-pill">
+                    <div class="stat-pill-val" id="statJoined">—</div>
+                    <div class="stat-pill-lbl">Member Since</div>
+                  </div>
+                  <div class="stat-pill">
+                    <div class="stat-pill-val">Pro</div>
+                    <div class="stat-pill-lbl">Plan</div>
+                  </div>
+                </div>
+
+                <div class="info-row">
+                  <span class="info-lbl"
+                    ><i class="fas fa-user"></i> Full Name</span
+                  ><span class="info-val" id="infoName">—</span>
+                </div>
+                <div class="info-row">
+                  <span class="info-lbl"
+                    ><i class="fas fa-envelope"></i> Email</span
+                  ><span class="info-val" id="infoEmail">—</span>
+                </div>
+                <div class="info-row">
+                  <span class="info-lbl"
+                    ><i class="fas fa-phone"></i> Phone</span
+                  ><span class="info-val" id="infoPhone">—</span>
+                </div>
+                <div class="info-row">
+                  <span class="info-lbl"
+                    ><i class="fas fa-map-marker-alt"></i> Location</span
+                  ><span class="info-val" id="infoAddress">—</span>
+                </div>
+                <div class="info-row">
+                  <span class="info-lbl"
+                    ><i class="fas fa-camera"></i> Profile Photo</span
+                  ><span class="info-val" id="infoPhoto">—</span>
+                </div>
+                <div class="info-row">
+                  <span class="info-lbl"
+                    ><i class="fas fa-clock"></i> Joined</span
+                  ><span class="info-val" id="infoCreated">—</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end .profile-right -->
+        </div>
+        <!-- end .profile-wrapper -->
+
+        <!-- ═══ HOW TO MANAGE PROFILE (INSIDE WRAPPER) ═══ -->
+        <div class="how-to-manage-profile">
+          <div class="manage-header">
+            <i class="fas fa-user-cog"></i>
+            <h3>How to manage your profile</h3>
+          </div>
+          <div class="manage-grid">
+            <div class="manage-item">
+              <div class="manage-icon"><i class="fas fa-camera"></i></div>
+              <div class="manage-text">
+                <h4>Upload Photo</h4>
+                <p>
+                  Click your avatar or use the photo section to add a profile
+                  picture.
+                </p>
+              </div>
+            </div>
+            <div class="manage-item">
+              <div class="manage-icon"><i class="fas fa-user-edit"></i></div>
+              <div class="manage-text">
+                <h4>Edit Details</h4>
+                <p>
+                  Update your name, email, phone, and location in the Edit
+                  Profile tab.
+                </p>
+              </div>
+            </div>
+            <div class="manage-item">
+              <div class="manage-icon"><i class="fas fa-shield-alt"></i></div>
+              <div class="manage-text">
+                <h4>Change Password</h4>
+                <p>
+                  Keep your account secure by regularly updating your password.
+                </p>
+              </div>
+            </div>
+            <div class="manage-item">
+              <div class="manage-icon"><i class="fas fa-id-card"></i></div>
+              <div class="manage-text">
+                <h4>View Account Info</h4>
+                <p>
+                  See your account statistics and read‑only details anytime.
+                </p>
+              </div>
+            </div>
+          </div>
+          <p class="manage-footnote">
+            <i class="fas fa-lock"></i> All changes are saved securely to your
+            account.
+          </p>
+        </div>
+        <!-- end .how-to-manage-profile -->
+      </main>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast hidden" id="toast">
+      <i class="fas fa-check-circle"></i>
+      <span id="toastMsg">Done!</span>
+    </div>
+
+    <script src="../js/profile.js"></script>
+  </body>
+</html>

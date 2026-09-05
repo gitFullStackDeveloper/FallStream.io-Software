@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Verify Email | FallStream.io</title>
+    <script src="../js/page-loader.js"></script>
+
+    <link rel="stylesheet" href="../css/login.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/verify-email.css" />
+  </head>
+  <body>
+    <div class="page-wrap">
+      <!-- ── LEFT PANEL ──────────────────────────────────── -->
+      <div class="left-bg">
+        <div class="grid-lines"></div>
+        <div class="particles" id="particles"></div>
+
+        <div class="left-content">
+          <div class="">
+            <img
+              src="../assets/Gemini_Generated_Image_3sayuy3sayuy3say.png"
+              style="width: 70px; height: auto"
+            />
+          </div>
+
+          <h1 class="animated-gradient-text">Verify Email</h1>
+          <p class="left-subtitle">
+            One last step! Enter the 6-digit code we sent to your email to
+            activate your account.
+          </p>
+
+          <ul class="feature-list">
+            <li class="feature-item">
+              <span class="feature-icon"
+                ><i class="fas fa-shield-alt"></i
+              ></span>
+              Secure verification
+            </li>
+            <li class="feature-item">
+              <span class="feature-icon"><i class="fas fa-clock"></i></span>
+              Code expires in 10 minutes
+            </li>
+            <li class="feature-item">
+              <span class="feature-icon"><i class="fas fa-envelope"></i></span>
+              Check spam if not received
+            </li>
+            <li class="feature-item">
+              <span class="feature-icon"><i class="fas fa-redo-alt"></i></span>
+              Resend code anytime
+            </li>
+          </ul>
+
+          <div class="secure-badge">
+            <i class="fas fa-lock"></i>
+            End-to-end encrypted
+          </div>
+        </div>
+      </div>
+
+      <!-- ── RIGHT PANEL ─────────────────────────────────── -->
+      <div class="right-panel">
+        <div class="form-card">
+          <!-- ═══ VERIFICATION STATE ═══ -->
+          <div id="verifyState">
+            <div class="form-header">
+              <div class="verify-icon">
+                <i class="fas fa-envelope-open-text"></i>
+              </div>
+              <h2 class="form-title">Check Your Email</h2>
+              <p class="form-subtitle">We sent a verification code to</p>
+            </div>
+
+            <div class="email-display" id="emailDisplay">
+              <i class="fas fa-envelope"></i>
+              <strong id="userEmail">loading...</strong>
+            </div>
+
+            <!-- Message area -->
+            <div id="verifyMessage"></div>
+
+            <!-- Code inputs -->
+            <div class="verification-code-wrapper" id="codeWrapper">
+              <input
+                type="text"
+                class="code-input"
+                maxlength="1"
+                pattern="[0-9]"
+                inputmode="numeric"
+                data-index="0"
+              />
+              <input
+                type="text"
+                class="code-input"
+                maxlength="1"
+                pattern="[0-9]"
+                inputmode="numeric"
+                data-index="1"
+              />
+              <input
+                type="text"
+                class="code-input"
+                maxlength="1"
+                pattern="[0-9]"
+                inputmode="numeric"
+                data-index="2"
+              />
+              <input
+                type="text"
+                class="code-input"
+                maxlength="1"
+                pattern="[0-9]"
+                inputmode="numeric"
+                data-index="3"
+              />
+              <input
+                type="text"
+                class="code-input"
+                maxlength="1"
+                pattern="[0-9]"
+                inputmode="numeric"
+                data-index="4"
+              />
+              <input
+                type="text"
+                class="code-input"
+                maxlength="1"
+                pattern="[0-9]"
+                inputmode="numeric"
+                data-index="5"
+              />
+            </div>
+
+            <!-- Timer -->
+            <div class="timer-display" id="timerDisplay">
+              Code expires in <span class="time" id="timer">10:00</span>
+            </div>
+
+            <!-- Verify button -->
+            <button
+              class="btn-gradient"
+              id="verifyBtn"
+              style="width: 100%; margin-top: 1.5rem"
+            >
+              <span class="btn-text"
+                ><i class="fas fa-check-circle"></i> Verify Email</span
+              >
+              <span class="btn-spinner" style="display: none"
+                ><i class="fas fa-spinner fa-spin"></i> Verifying...</span
+              >
+            </button>
+
+            <!-- Resend -->
+            <p style="text-align: center; margin-top: 1.2rem">
+              Didn't receive the code?
+              <button class="resend-link" id="resendBtn">Resend Code</button>
+            </p>
+
+            <p style="text-align: center; margin-top: 0.8rem">
+              <a
+                href="login.html"
+                style="
+                  color: var(--gray-500);
+                  font-size: 0.85rem;
+                  text-decoration: none;
+                "
+              >
+                <i class="fas fa-arrow-left"></i> Back to Login
+              </a>
+            </p>
+          </div>
+
+          <!-- ═══ SUCCESS STATE ═══ -->
+          <div id="successState" class="hidden">
+            <div class="form-header">
+              <div class="success-check">
+                <i class="fas fa-check"></i>
+              </div>
+              <h2 class="form-title">Email Verified!</h2>
+              <p class="form-subtitle">Your account is now active</p>
+            </div>
+
+            <div
+              style="
+                background: #f0fdf4;
+                border: 1px solid #bbf7d0;
+                border-radius: 12px;
+                padding: 1.2rem;
+                text-align: center;
+                margin: 1.5rem 0;
+              "
+            >
+              <i
+                class="fas fa-party-horn"
+                style="font-size: 1.8rem; color: #16a34a; margin-bottom: 0.5rem"
+              ></i>
+              <p style="color: #065f46; font-weight: 500">
+                Congratulations! Your email has been verified successfully.
+              </p>
+              <p
+                style="
+                  color: #065f46;
+                  font-size: 0.85rem;
+                  margin-top: 0.3rem;
+                  opacity: 0.8;
+                "
+              >
+                You can now login and start recording.
+              </p>
+            </div>
+
+            <a
+              href="../login"
+              class="btn-gradient"
+              style="
+                display: flex;
+                width: 100%;
+                text-decoration: none;
+                justify-content: center;
+              "
+            >
+              <i class="fas fa-sign-in-alt"></i>
+              <span>Go to Login</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/verify-email.js"></script>
+  </body>
+</html>

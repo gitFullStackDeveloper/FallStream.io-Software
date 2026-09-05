@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/webcam-bubble.css" />
+  </head>
+  <body>
+    <div class="bubble-container">
+      <div class="bubble" id="bubble">
+        <video id="bubbleVideo" autoplay muted playsinline></video>
+        <button
+          class="control-btn fullscreen-btn"
+          id="fullscreenBtn"
+          title="Full Screen"
+        >
+          <i class="fas fa-expand"></i>
+        </button>
+      </div>
+    </div>
+
+    <script src="../js/webcam-bubble.js"></script>
+  </body>
+</html>

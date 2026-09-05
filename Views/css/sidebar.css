@@ -1,0 +1,469 @@
+:root {
+  --navy-950: #030a14; /* slightly deeper than #040d1a */
+  --navy-900: #051220;
+  --navy-800: #0a1a2f;
+  --blue-500: #2563eb;
+  --blue-400: #3b82f6;
+  --blue-300: #93c5fd;
+  --accent: #38bdf8;
+  --white: #ffffff;
+  --gray-50: #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-300: #cbd5e1;
+  --gray-400: #94a3b8;
+  --gray-500: #64748b;
+  --gray-600: #475569;
+  --gray-700: #334155;
+  --gray-800: #1e293b;
+}
+
+/* ─── Sidebar Container ─── */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 260px;
+  min-width: 260px;
+  height: 100vh;
+  background: var(--navy-950); /* deeper navy */
+  display: flex;
+  flex-direction: column;
+  z-index: 20;
+  box-shadow: 2px 0 30px rgba(0, 0, 0, 0.25);
+  transition:
+    width 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1),
+    min-width 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  overflow: hidden;
+}
+
+/* ─── Background Orbs ─── */
+.sidebar::before {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(
+    circle,
+    rgba(37, 99, 235, 0.35) 0%,
+    transparent 70%
+  );
+  top: -80px;
+  left: -100px;
+  border-radius: 50%;
+  animation: orbFloat1 10s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.sidebar::after {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(
+    circle,
+    rgba(56, 189, 248, 0.2) 0%,
+    transparent 65%
+  );
+  bottom: -60px;
+  right: -80px;
+  border-radius: 50%;
+  animation: orbFloat2 13s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes orbFloat1 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(40px, 30px) scale(1.1);
+  }
+}
+
+@keyframes orbFloat2 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-30px, -20px) scale(1.08);
+  }
+}
+
+/* Grid lines — increased opacity for better visibility */
+.sidebar .grid-lines {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(56, 189, 248, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Inner elements above animations */
+.sidebar-header,
+.sidebar-nav,
+.sidebar-footer {
+  position: relative;
+  z-index: 2;
+}
+
+/* ─── Collapsed State ─── */
+.sidebar.collapsed {
+  width: 72px;
+  min-width: 72px;
+}
+
+/* ─── Sidebar Header ─── */
+.sidebar-header {
+  padding: 1.4rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  gap: 8px;
+}
+
+.logo-icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, var(--blue-500), var(--accent));
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: #fff;
+  animation: logoPulse 3s ease-in-out infinite;
+}
+
+@keyframes logoPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 18px rgba(37, 99, 235, 0.4);
+  }
+  50% {
+    box-shadow:
+      0 0 36px rgba(56, 189, 248, 0.55),
+      0 0 60px rgba(37, 99, 235, 0.2);
+  }
+}
+
+.logo-text {
+  font-family: "Outfit", sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  background: linear-gradient(
+    100deg,
+    #fff 0%,
+    var(--blue-300) 30%,
+    var(--accent) 60%,
+    #fff 100%
+  );
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: textShine 5s linear infinite;
+  white-space: nowrap;
+  flex: 1;
+  margin-left: 2px;
+  transition:
+    opacity 0.2s,
+    width 0.2s;
+}
+
+@keyframes textShine {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 250% 50%;
+  }
+}
+
+.sidebar.collapsed .logo-text {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+  margin: 0;
+  flex: 0;
+}
+
+.sidebar-toggle {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.sidebar-toggle:hover {
+  background: var(--blue-500);
+  border-color: var(--blue-500);
+}
+
+.sidebar.collapsed .sidebar-toggle i {
+  transform: rotate(180deg);
+}
+
+.sidebar.collapsed .sidebar-header {
+  justify-content: center;
+}
+
+.sidebar.collapsed .sidebar-toggle {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* ─── Navigation ─── */
+.sidebar-nav {
+  flex: 1;
+  padding: 1.25rem 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sidebar-nav ul {
+  list-style: none;
+}
+
+.nav-item {
+  margin: 0.2rem 0.7rem;
+}
+
+.nav-item a {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.65);
+  text-decoration: none;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+.nav-item a i {
+  width: 20px;
+  font-size: 1rem;
+  color: var(--blue-300);
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.nav-item.active > a,
+.nav-item a:hover {
+  background: rgba(59, 130, 246, 0.22);
+  color: #fff;
+}
+
+.nav-item.active > a i,
+.nav-item a:hover i {
+  color: #fff;
+}
+
+.nav-item.active > a {
+  box-shadow: inset 0 0 0 1px rgba(59, 130, 246, 0.3);
+}
+
+.sidebar.collapsed .nav-label {
+  display: none;
+}
+
+.sidebar.collapsed .nav-item a {
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.sidebar.collapsed .nav-item a i {
+  margin: 0;
+}
+
+/* ─── Sidebar Footer ─── */
+.sidebar-footer {
+  padding: 0.9rem 0.7rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-footer a {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 10px 14px;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.sidebar-footer a:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.sidebar-footer a i {
+  width: 20px;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.sidebar-footer a:hover i {
+  color: #fff;
+}
+
+.sidebar.collapsed .sidebar-footer a {
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.sidebar.collapsed .sidebar-footer .nav-label {
+  display: none;
+}
+
+.sidebar.collapsed .sidebar-footer a i {
+  margin: 0;
+}
+
+/* ─── Main Content Offset ─── */
+.main-content {
+  margin-left: 260px;
+  transition: margin-left 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+.main-content.sidebar-collapsed {
+  margin-left: 72px;
+}
+
+/* ─── Mobile Responsive ─── */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: -260px;
+    transition:
+      left 0.3s,
+      width 0.3s;
+  }
+  .sidebar.open-mobile {
+    left: 0;
+  }
+  .main-content {
+    margin-left: 0 !important;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f1f5f9;
+}
+
+/* Base class for any button you want this effect on */
+.btn-hover-slide {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  /* Make sure button has proper styling */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border: none;
+  /* border-radius: 40px; */
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  text-decoration: none;
+
+  /* Default gradient background */
+  /* background: linear-gradient(135deg, #2563eb, #1d4ed8); */
+  color: #fff;
+  box-shadow: 0 6px 14px rgba(37, 99, 235, 0.3);
+}
+
+/* The sliding black overlay */
+.btn-hover-slide::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  color: #fff;
+  background: linear-gradient(135deg, #000000, #111827);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  z-index: 0;
+  border-radius: inherit;
+}
+
+/* On hover: black gradient slides in */
+.btn-hover-slide:hover::before {
+  transform: scaleX(1);
+  color: #fff;
+}
+
+/* Button lifts on hover */
+.btn-hover-slide:hover {
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.35);
+}
+
+/* Press effect */
+.btn-hover-slide:active {
+  color: #fff;
+  transform: translateY(0);
+}
+
+/* Keep text/icon above the sliding overlay */
+.btn-hover-slide > * {
+  position: relative;
+  z-index: 1;
+
+  color: #fff;
+}

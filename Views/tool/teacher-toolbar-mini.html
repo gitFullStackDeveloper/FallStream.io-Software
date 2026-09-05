@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/teacher-toolbar-mini.css" />
+  </head>
+  <body>
+    <div id="toolbar">
+      <button id="btnPower" title="OFF - Press P to turn ON">
+        <i class="fas fa-power-off"></i>
+      </button>
+      <div class="div"></div>
+      <div id="dragHandle"><i class="fas fa-grip-dots-vertical"></i></div>
+      <div class="div"></div>
+      <button class="tbtn active" id="btnLaser" title="Laser (L)">
+        <i class="fas fa-circle"></i>
+      </button>
+      <button class="tbtn" id="btnDraw" title="Draw (D)">
+        <i class="fas fa-pencil-alt"></i>
+      </button>
+      <button class="tbtn" id="btnEraser" title="Eraser (E)">
+        <i class="fas fa-eraser"></i>
+      </button>
+      <div class="div"></div>
+      <button class="tbtn" id="btnRect" title="Rectangle (R)">
+        <i class="far fa-square"></i>
+      </button>
+      <button class="tbtn" id="btnCircle" title="Circle (O)">
+        <i class="far fa-circle"></i>
+      </button>
+      <div class="div"></div>
+      <div
+        class="cdot active"
+        data-color="#ef4444"
+        style="background: #ef4444"
+        title="Red"
+      ></div>
+      <div
+        class="cdot"
+        data-color="#f59e0b"
+        style="background: #f59e0b"
+        title="Yellow"
+      ></div>
+      <div
+        class="cdot"
+        data-color="#22c55e"
+        style="background: #22c55e"
+        title="Green"
+      ></div>
+      <div
+        class="cdot"
+        data-color="#3b82f6"
+        style="background: #3b82f6"
+        title="Blue"
+      ></div>
+      <div
+        class="cdot"
+        data-color="#a855f7"
+        style="background: #a855f7"
+        title="Purple"
+      ></div>
+      <div
+        class="cdot"
+        data-color="#ffffff"
+        style="background: #fff; border: 2px solid rgba(255, 255, 255, 0.3)"
+        title="White"
+      ></div>
+      <div class="div"></div>
+      <button class="tbtn" id="btnUndo" title="Undo (Ctrl+Z)">
+        <i class="fas fa-undo"></i>
+      </button>
+      <button class="tbtn" id="btnRedo" title="Redo (Ctrl+Y)">
+        <i class="fas fa-redo"></i>
+      </button>
+      <div class="div"></div>
+      <button id="closeBtn" title="Close"><i class="fas fa-times"></i></button>
+    </div>
+
+    <script src="../js/teacher-toolbar-mini.js"></script>
+  </body>
+</html>

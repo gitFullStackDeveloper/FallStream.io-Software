@@ -1,0 +1,199 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background: transparent !important;
+  overflow: hidden;
+  -webkit-app-region: drag;
+}
+
+.bubble-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bubble {
+  --bcolor: #3b82f680;
+  --glowcolor: #3b82f6;
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #3b82f6;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  background: #0a1628;
+  -webkit-app-region: drag;
+  transition:
+    width 0.3s,
+    height 0.3s,
+    border-radius 0.3s,
+    border-color 0.3s;
+}
+
+.bubble.fullscreen {
+  width: 100vw !important;
+  height: 100vh !important;
+  border-radius: 0 !important;
+  border: none !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+}
+
+.bubble video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1);
+  background: #0a1628;
+  border-radius: inherit;
+  -webkit-app-region: no-drag;
+}
+
+/* ═══ CONTROL BUTTONS ═══ */
+.control-btn {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  color: white;
+  font-size: 0.7rem;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-app-region: no-drag;
+  transition:
+    opacity 0.3s,
+    transform 0.15s,
+    background 0.2s;
+  backdrop-filter: blur(4px);
+}
+.control-btn:hover {
+  background: rgba(0, 0, 0, 0.85);
+  border-color: #fff;
+  transform: scale(1.1);
+}
+
+/* Close button - top right */
+/* .close-btn {
+      top: 8px; right: 8px;
+      opacity: 0;
+    }
+    .bubble:hover .close-btn { opacity: 1; }
+    .bubble.fullscreen .close-btn { opacity: 0; }
+    .bubble.fullscreen.show-controls .close-btn { opacity: 1; }
+     */
+/* Fullscreen button - CENTER in bubble mode, TOP-RIGHT in fullscreen */
+.fullscreen-btn {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  font-size: 0.9rem;
+  opacity: 0;
+}
+.bubble:hover .fullscreen-btn {
+  opacity: 1;
+}
+.bubble:hover .fullscreen-btn:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* In fullscreen mode: move to top-left corner */
+.bubble.fullscreen .fullscreen-btn {
+  top: 8px;
+  left: 8px;
+  transform: translate(0, 0);
+  width: 32px;
+  height: 32px;
+  font-size: 0.7rem;
+  opacity: 0;
+}
+.bubble.fullscreen .fullscreen-btn:hover {
+  transform: scale(1.1);
+}
+.bubble.fullscreen.show-controls .fullscreen-btn {
+  opacity: 1;
+}
+
+@keyframes blobMorph {
+  0%,
+  100% {
+    border-radius: 60% 40% 50% 50% / 50% 60% 40% 50%;
+  }
+  33% {
+    border-radius: 40% 60% 50% 50% / 60% 40% 60% 40%;
+  }
+  66% {
+    border-radius: 55% 45% 45% 55% / 55% 55% 45% 45%;
+  }
+}
+@keyframes borderPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 6px 28px rgba(0, 0, 0, 0.6),
+      0 0 0 4px var(--bcolor);
+  }
+  50% {
+    box-shadow:
+      0 6px 28px rgba(0, 0, 0, 0.6),
+      0 0 0 14px transparent;
+  }
+}
+@keyframes rainbowBorder {
+  0% {
+    border-color: #ef4444;
+  }
+  20% {
+    border-color: #f59e0b;
+  }
+  40% {
+    border-color: #22c55e;
+  }
+  60% {
+    border-color: #3b82f6;
+  }
+  80% {
+    border-color: #a855f7;
+  }
+  100% {
+    border-color: #ef4444;
+  }
+}
+@keyframes glowPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 6px 28px rgba(0, 0, 0, 0.6),
+      0 0 20px 4px var(--glowcolor);
+  }
+  50% {
+    box-shadow:
+      0 6px 28px rgba(0, 0, 0, 0.6),
+      0 0 40px 10px var(--glowcolor);
+  }
+}
+
+/* Cursor hide in fullscreen */
+.bubble.fullscreen {
+  cursor: none;
+}
+.bubble.fullscreen.show-controls {
+  cursor: default;
+}

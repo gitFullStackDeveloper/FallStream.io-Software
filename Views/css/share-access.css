@@ -1,0 +1,203 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  background: linear-gradient(160deg, #f0f4ff, #e8f0fe, #f8fafc);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.access-card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 2.5rem 2rem;
+  max-width: 460px;
+  width: 100%;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+.access-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  color: #fff;
+  font-size: 2rem;
+}
+.access-icon.locked {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+}
+.access-icon.blocked {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+.access-icon.expired {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+.access-icon.success {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+h2 {
+  font-family: "Outfit", sans-serif;
+  font-size: 1.5rem;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+}
+.shared-by {
+  color: #64748b;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+.shared-by strong {
+  color: #0f172a;
+}
+.form-group {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+.form-group label {
+  font-weight: 600;
+  color: #475569;
+  font-size: 0.85rem;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+.form-group input {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  outline: none;
+}
+.form-group input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+.btn-access {
+  width: 100%;
+  padding: 0.8rem;
+  background: linear-gradient(145deg, #2563eb, #1d4ed8);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+.btn-access:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+}
+.btn-access:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+.error-msg {
+  color: #ef4444;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  display: none;
+}
+.error-msg.show {
+  display: block;
+}
+.blocked-message {
+  color: #991b1b;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.blocked-message i {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+/* ═══════════════════════════════════════════════
+   BUTTON HOVER SLIDE EFFECT — Reusable
+   Gradient Black Slide on Hover
+   ═══════════════════════════════════════════════ */
+
+/* Base class for any button you want this effect on */
+.btn-hover-slide {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  /* Make sure button has proper styling */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border: none;
+  /* border-radius: 40px; */
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  text-decoration: none;
+
+  /* Default gradient background */
+  /* background: linear-gradient(135deg, #2563eb, #1d4ed8); */
+  color: #fff;
+  box-shadow: 0 6px 14px rgba(37, 99, 235, 0.3);
+}
+
+/* The sliding black overlay */
+.btn-hover-slide::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  color: #fff;
+  background: linear-gradient(135deg, #000000, #111827);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  z-index: 0;
+  border-radius: inherit;
+}
+
+/* On hover: black gradient slides in */
+.btn-hover-slide:hover::before {
+  transform: scaleX(1);
+  color: #fff;
+}
+
+/* Button lifts on hover */
+.btn-hover-slide:hover {
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.35);
+}
+
+/* Press effect */
+.btn-hover-slide:active {
+  color: #fff;
+  transform: translateY(0);
+}
+
+/* Keep text/icon above the sliding overlay */
+.btn-hover-slide > * {
+  position: relative;
+  z-index: 1;
+
+  color: #fff;
+}

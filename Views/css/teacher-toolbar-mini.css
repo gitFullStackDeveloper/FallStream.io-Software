@@ -1,0 +1,141 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background: transparent !important;
+  overflow: hidden;
+  font-family: "Segoe UI", sans-serif;
+}
+
+#toolbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 6px;
+  background: rgba(15, 23, 42, 0.94);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  border-radius: 16px;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.6);
+  width: 48px;
+  user-select: none;
+  -webkit-app-region: no-drag;
+}
+
+#btnPower {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid rgba(239, 68, 68, 0.5);
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+#btnPower:hover {
+  transform: scale(1.1);
+}
+#btnPower.on {
+  border-color: #22c55e;
+  background: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+  box-shadow: 0 0 16px rgba(34, 197, 94, 0.3);
+}
+
+.tbtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+.tbtn:hover {
+  background: rgba(56, 189, 248, 0.2);
+  color: #fff;
+  transform: scale(1.05);
+}
+.tbtn.active {
+  background: rgba(56, 189, 248, 0.3);
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.6);
+}
+
+.cdot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.cdot:hover {
+  transform: scale(1.2);
+  border-color: #fff;
+}
+.cdot.active {
+  border-color: #fff;
+  box-shadow: 0 0 10px currentColor;
+}
+
+.div {
+  width: 70%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 2px 0;
+}
+
+.disabled .tbtn,
+.disabled .cdot {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* #dragHandle {
+      width: 100%; height: 14px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: grab; color: rgba(255,255,255,0.3); font-size: 0.4rem;
+    } */
+#dragHandle {
+  width: 100%;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.4rem;
+  -webkit-app-region: drag; /* ⬅️ Native Electron drag */
+}
+#closeBtn {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(239, 68, 68, 0.12);
+  color: rgba(239, 68, 68, 0.6);
+  font-size: 0.6rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#closeBtn:hover {
+  background: rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+}

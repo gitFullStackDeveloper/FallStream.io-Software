@@ -27,9 +27,9 @@ FallStream.io is a browser-based lecture and live session delivery platform that
 * ├── Schema/            # Database Schemas
 * ├── electron/          # Electron Configuration
 * └── View/
-*  ├── css/           # CSS Files
-*  ├── js/            # JavaScript Files
-*  └── tool/          # HTML Files
+  ├── css/           # CSS Files
+  ├── js/            # JavaScript Files
+  └── tool/          # HTML Files
 
 ## Author
 

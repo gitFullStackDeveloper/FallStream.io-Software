@@ -32,6 +32,23 @@ FallStream.io-Software/
     ├── js/            # JavaScript Files
     └── tool/          # HTML Files
 ```
+
+## System Requirements
+
+- Private and secure institute-based software
+- Students can join classes directly through a web browser
+- No software installation required for students
+- Teachers can store their lectures securely
+- Teachers can share stored lectures with students
+- Browser-based live lecture and session delivery
+- Real-time communication during live sessions
+- Secure access to lectures and shared content
+- Responsive interface for students and teachers
+
+## Project Goal
+
+To provide an institute's own private and secure lecture platform where students can join classes directly through their browser without installing software, while teachers can securely store, manage, and share their lectures with students.
+
 ## Author
 
 - Arham Raza
